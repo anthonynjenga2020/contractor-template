@@ -15,8 +15,10 @@ export default {
         'gym-border': 'var(--border)',
       },
       fontFamily: {
-        headline: ['Space Grotesk', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        // Reads from CSS variable so each theme can swap the font without
+        // touching any JSX. Fallback to Space Grotesk if var isn't set yet.
+        headline: ['var(--font-headline, Space Grotesk)', 'sans-serif'],
+        body: ['var(--font-body, Inter)', 'sans-serif'],
       },
       animation: {
         'fade-up': 'fadeUp 0.7s ease forwards',

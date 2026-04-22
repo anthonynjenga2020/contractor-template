@@ -73,6 +73,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS intake_submissions_updated_at ON intake_submissions;
 CREATE TRIGGER intake_submissions_updated_at
   BEFORE UPDATE ON intake_submissions
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
@@ -118,6 +119,7 @@ CREATE TABLE IF NOT EXISTS gym_clients (
   referred_by           TEXT
 );
 
+DROP TRIGGER IF EXISTS gym_clients_updated_at ON gym_clients;
 CREATE TRIGGER gym_clients_updated_at
   BEFORE UPDATE ON gym_clients
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
@@ -167,13 +169,19 @@ CREATE TABLE IF NOT EXISTS leads (
 
   outreach_sent_at    TIMESTAMPTZ,
   outreach_channel    TEXT,                     -- 'whatsapp' | 'email' | 'call'
+  outreach_step       INTEGER DEFAULT 0,        -- 0=not contacted, 1–5=sequence step
   last_contact_at     TIMESTAMPTZ,
+  demo_url            TEXT,                     -- Generated preview URL sent to lead
   notes               TEXT,
 
   -- If they converted
-  client_id           UUID REFERENCES gym_clients(id) ON DELETE SET NULL
+  client_id           UUID REFERENCES gym_clients(id) ON DELETE SET NULL,
+
+  -- Deduplication — required for upsert resolution=ignore-duplicates
+  UNIQUE (gym_name, address)
 );
 
+DROP TRIGGER IF EXISTS leads_updated_at ON leads;
 CREATE TRIGGER leads_updated_at
   BEFORE UPDATE ON leads
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
@@ -196,6 +204,14 @@ ALTER TABLE gym_clients         ENABLE ROW LEVEL SECURITY;
 ALTER TABLE leads               ENABLE ROW LEVEL SECURITY;
 
 -- Allow anonymous form submissions (public intake form)
+DROP POLICY IF EXISTS "anon_can_insert_intake"   ON intake_submissions;
+DROP POLICY IF EXISTS "anon_cannot_read_intake"  ON intake_submissions;
+DROP POLICY IF EXISTS "auth_can_read_intake"     ON intake_submissions;
+DROP POLICY IF EXISTS "auth_can_update_intake"   ON intake_submissions;
+DROP POLICY IF EXISTS "auth_can_read_clients"    ON gym_clients;
+DROP POLICY IF EXISTS "auth_can_all_clients"     ON gym_clients;
+DROP POLICY IF EXISTS "auth_can_all_leads"       ON leads;
+
 CREATE POLICY "anon_can_insert_intake"
   ON intake_submissions FOR INSERT
   TO anon

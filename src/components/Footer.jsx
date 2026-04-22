@@ -114,7 +114,7 @@ export default function Footer({ config }) {
           </p>
           <p className="text-gray-700 text-xs">
             Website powered by{' '}
-            <a href="https://jengasystems.co.ke" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary transition-colors">
+            <a href="https://jengasystems.online" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-primary transition-colors">
               Jenga Systems
             </a>
           </p>

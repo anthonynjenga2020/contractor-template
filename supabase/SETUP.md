@@ -139,7 +139,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY — anon/public key
 
 ## 9. Test the Pipeline End-to-End
 
-1. Go to `jengasystems.co.ke/onboarding` (or localhost:9002/onboarding)
+1. Go to `jengasystems.online/onboarding` (or localhost:9002/onboarding)
 2. Fill in the form with test data → Submit
 3. Go to Supabase Dashboard → Table Editor → `intake_submissions`
    → You should see a new row with `status = "processing"`
