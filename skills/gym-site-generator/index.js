@@ -158,10 +158,29 @@ async function main() {
   })
   console.log('     ✅ intake_submissions updated')
 
-  // ── Step 7: Create gym client record ─────────────────────────────────────
+  // ── Step 7: Create gym client record + send welcome email ────────────────
   log('step', 7, 'Creating gym client record…')
   await createGymClient(intake, deployedUrl, rowId, SUPABASE_URL, SUPABASE_KEY)
   console.log('     ✅ gym_clients record created')
+
+  // Send welcome email via jengasystems API (non-blocking)
+  const INTERNAL_API_KEY = process.env.INTERNAL_API_KEY
+  const APP_URL          = process.env.APP_URL ?? 'https://jengasystems.online'
+  if (INTERNAL_API_KEY && intake.email) {
+    fetch(`${APP_URL}/api/email/site-deployed`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'x-api-key': INTERNAL_API_KEY },
+      body:    JSON.stringify({
+        ownerName:   intake.owner_name,
+        gymName:     intake.gym_name,
+        deployedUrl,
+        email:       intake.email
+      })
+    }).then(() => console.log('     ✅ Welcome email triggered'))
+      .catch(e => console.warn('     ⚠️  Welcome email failed (non-critical):', e.message))
+  } else {
+    console.log('     ℹ️  Welcome email skipped (no INTERNAL_API_KEY or no client email)')
+  }
 
   // ── Done ──────────────────────────────────────────────────────────────────
   console.log('\n╔══════════════════════════════════════════════╗')
