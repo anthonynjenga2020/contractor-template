@@ -354,7 +354,7 @@ async function createGithubRepo(
   await new Promise(r => setTimeout(r, 3000))
 
   // 2. Inject gym.config.json into the repo
-  const configContent = btoa(JSON.stringify(config, null, 2))
+  const configContent = toBase64(JSON.stringify(config, null, 2))
   const injectRes = await fetch(
     `https://api.github.com/repos/${repoFullName}/contents/src/config/gym.config.json`,
     {
@@ -494,6 +494,20 @@ async function notifyAnthony(
   )
 }
 
+
+// ─── UTF-8 safe base64 encoder ───────────────────────────────
+// Deno's btoa() only handles Latin1 (bytes 0–255). Any Unicode character
+// above U+00FF (curly quotes, em-dashes, etc.) will throw
+// "Cannot encode string: string contains characters outside of the Latin1 range".
+// Fix: encode to UTF-8 bytes first via TextEncoder, then btoa each byte.
+function toBase64(str: string): string {
+  const bytes = new TextEncoder().encode(str)
+  let binary = ''
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i])
+  }
+  return btoa(binary)
+}
 
 // ─── Helpers ─────────────────────────────────────────────────
 async function updateStatus(
