@@ -253,7 +253,7 @@ function normalizeServices(services: any): any[] {
   if (!services || !Array.isArray(services)) return []
   return services.map((s: any) => ({
     name: s.name ?? s,
-    icon: s.icon ?? '💪',
+    icon: '',
     desc: s.desc ?? s.description ?? '',
     image: s.image ?? '',
   }))
@@ -354,10 +354,7 @@ async function createGithubRepo(
   await new Promise(r => setTimeout(r, 3000))
 
   // 2. Inject gym.config.json into the repo
-  // btoa() only handles Latin1 — use encodeURIComponent to safely encode Unicode
-  // (emoji in service icons, special chars in gym names, etc.)
-  const configJson    = JSON.stringify(config, null, 2)
-  const configContent = btoa(unescape(encodeURIComponent(configJson)))
+  const configContent = btoa(JSON.stringify(config, null, 2))
   const injectRes = await fetch(
     `https://api.github.com/repos/${repoFullName}/contents/src/config/gym.config.json`,
     {

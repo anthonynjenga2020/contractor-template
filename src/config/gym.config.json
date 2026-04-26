@@ -34,12 +34,12 @@
   "aboutTitle": "We Don't Do Half Reps. In Training or in Life.",
   "aboutDescription": "Ironclad Fitness was built for people who are serious about results. No gimmicks, no overcrowded machines, no egos. Just a community of people who show up, put in the work, and leave better than they came in.\n\nWhether you're picking up your first dumbbell or training for your next competition — you belong here.",
   "services": [
-    { "name": "Weight Training", "icon": "🏋️", "desc": "Fully equipped free weights and machines. From beginners to powerlifters, we've got your setup.", "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80" },
-    { "name": "HIIT Classes", "icon": "🔥", "desc": "High-intensity interval training designed to torch fat and build endurance. 45 minutes, max results.", "image": "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=800&q=80" },
-    { "name": "Yoga & Mobility", "icon": "🧘", "desc": "Recovery and flexibility sessions to keep your body working the way it should.", "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80" },
-    { "name": "Boxing & MMA", "icon": "🥊", "desc": "Bag work, technique, sparring — for fitness or competition. Bags, gloves, and coaches provided.", "image": "https://images.unsplash.com/photo-1552072092-7f9b8d63efcb?w=800&q=80" },
-    { "name": "Cardio Zone", "icon": "🏃", "desc": "Treadmills, bikes, rowers. The boring stuff that actually matters. 24/7 accessible.", "image": "https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800&q=80" },
-    { "name": "Personal Training", "icon": "🎯", "desc": "One-on-one sessions with a certified trainer who actually listens to what you want to achieve.", "image": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80" }
+    { "name": "Weight Training", "icon": "", "desc": "Fully equipped free weights and machines. From beginners to powerlifters, we've got your setup.", "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80" },
+    { "name": "HIIT Classes", "icon": "", "desc": "High-intensity interval training designed to torch fat and build endurance. 45 minutes, max results.", "image": "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=800&q=80" },
+    { "name": "Yoga & Mobility", "icon": "", "desc": "Recovery and flexibility sessions to keep your body working the way it should.", "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80" },
+    { "name": "Boxing & MMA", "icon": "", "desc": "Bag work, technique, sparring — for fitness or competition. Bags, gloves, and coaches provided.", "image": "https://images.unsplash.com/photo-1552072092-7f9b8d63efcb?w=800&q=80" },
+    { "name": "Cardio Zone", "icon": "", "desc": "Treadmills, bikes, rowers. The boring stuff that actually matters. 24/7 accessible.", "image": "https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800&q=80" },
+    { "name": "Personal Training", "icon": "", "desc": "One-on-one sessions with a certified trainer who actually listens to what you want to achieve.", "image": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80" }
   ],
   "schedule": [
     {
@@ -111,7 +111,7 @@
       "level": "All Levels",
       "price": 8500,
       "currency": "KES",
-      "icon": "🔥",
+      "icon": "",
       "includes": ["Daily HIIT sessions", "Nutrition plan", "WhatsApp accountability group", "Weekly weigh-ins with trainer", "Progress photos every 10 days"]
     },
     {
@@ -121,7 +121,7 @@
       "level": "Beginner–Intermediate",
       "price": 22000,
       "currency": "KES",
-      "icon": "💪",
+      "icon": "",
       "includes": ["3x weekly strength sessions", "Custom program by James", "Monthly body composition scan", "Supplement guidance", "Post-program assessment"]
     },
     {
@@ -131,7 +131,7 @@
       "level": "Intermediate–Advanced",
       "price": 15000,
       "currency": "KES",
-      "icon": "🥊",
+      "icon": "",
       "includes": ["4x weekly sessions with Brian", "Sparring (weeks 5–8)", "Full boxing kit included", "Nutrition for fighters guide", "Sparring video review"]
     }
   ],
