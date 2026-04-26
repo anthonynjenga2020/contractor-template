@@ -260,5 +260,8 @@
   "paystackPublicKey": "",
   "deployedUrl": "",
   "vercelProjectId": "",
-  "supabaseRowId": ""
+  "supabaseRowId": "",
+  "googlePlaceId": "",
+  "googleReviewUrl": "",
+  "seoDescription": ""
 }

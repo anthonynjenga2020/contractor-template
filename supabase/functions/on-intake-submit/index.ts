@@ -43,8 +43,8 @@ Deno.serve(async (req: Request) => {
 
     console.log(`[on-intake-submit] Processing submission for: ${record.gym_name}`)
 
-    // 1. Mark as processing
-    await updateStatus(record.id, 'processing')
+    // 1. Mark as generating (shows "Building" in the dashboard)
+    await updateStatus(record.id, 'generating')
 
     // 2. Upload images to Google Drive
     const mediaUrls = await uploadMedia(record)
@@ -354,7 +354,10 @@ async function createGithubRepo(
   await new Promise(r => setTimeout(r, 3000))
 
   // 2. Inject gym.config.json into the repo
-  const configContent = btoa(JSON.stringify(config, null, 2))
+  // btoa() only handles Latin1 — use encodeURIComponent to safely encode Unicode
+  // (emoji in service icons, special chars in gym names, etc.)
+  const configJson    = JSON.stringify(config, null, 2)
+  const configContent = btoa(unescape(encodeURIComponent(configJson)))
   const injectRes = await fetch(
     `https://api.github.com/repos/${repoFullName}/contents/src/config/gym.config.json`,
     {

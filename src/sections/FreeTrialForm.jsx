@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useReveal } from '../hooks/useReveal.js'
+import { insertLead } from '../lib/supabase.js'
 
 export default function FreeTrialForm({ config }) {
   const ref = useReveal()
@@ -15,8 +16,21 @@ export default function FreeTrialForm({ config }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    // Placeholder: replace with Supabase insert or formspree
-    await new Promise(r => setTimeout(r, 1200))
+    try {
+      await insertLead({
+        gymName:       config.gymName,
+        name:          form.name,
+        email:         form.email,
+        phone:         form.phone,
+        goal:          form.goal,
+        classInterest: form.classInterest,
+        preferredTime: form.preferredTime,
+        source:        'website_free_trial',
+      })
+    } catch (err) {
+      console.error('Lead submit error:', err)
+      // Don't block UX — still show success to user
+    }
     setLoading(false)
     setSubmitted(true)
   }

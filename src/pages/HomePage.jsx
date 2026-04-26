@@ -9,8 +9,9 @@ import Trainers from '../sections/Trainers.jsx'
 import Gallery from '../sections/Gallery.jsx'
 import Testimonials from '../sections/Testimonials.jsx'
 import Pricing from '../sections/Pricing.jsx'
-import FAQ from '../sections/FAQ.jsx'
+import CTA from '../sections/CTA.jsx'
 import FreeTrialForm from '../sections/FreeTrialForm.jsx'
+import FAQ from '../sections/FAQ.jsx'
 import Contact from '../sections/Contact.jsx'
 
 export default function HomePage({ config }) {
@@ -27,6 +28,7 @@ export default function HomePage({ config }) {
       <Gallery config={config} />
       <Testimonials config={config} />
       <Pricing config={config} />
+      <CTA config={config} />
       <FreeTrialForm config={config} />
       <FAQ config={config} />
       <Contact config={config} />

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useReveal } from '../hooks/useReveal.js'
+import { insertContact } from '../lib/supabase.js'
 
 export default function Contact({ config }) {
   const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' })
@@ -11,8 +12,17 @@ export default function Contact({ config }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    // Placeholder: replace with Supabase insert or email service
-    await new Promise(r => setTimeout(r, 1000))
+    try {
+      await insertContact({
+        name:    form.name,
+        phone:   form.phone,
+        email:   form.email,
+        message: form.message,
+        source:  'website_contact',
+      })
+    } catch (err) {
+      console.error('Contact submit error:', err)
+    }
     setLoading(false)
     setSent(true)
     setForm({ name: '', phone: '', email: '', message: '' })
