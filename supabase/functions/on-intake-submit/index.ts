@@ -389,8 +389,18 @@ async function deployToVercel(repoName: string): Promise<string> {
 
   const baseUrl = `https://api.vercel.com`
   const teamParam = teamId ? `?teamId=${teamId}` : ''
+  const fullRepo = `${githubOrg}/${repoName}`
+
+  // Give GitHub time to fully propagate the new repo + config commit
+  // before Vercel tries to access it. Without this, Vercel 404s.
+  console.log(`[deployToVercel] Waiting 10s for GitHub to propagate ${fullRepo}...`)
+  await new Promise(r => setTimeout(r, 10_000))
 
   // 1. Create Vercel project linked to GitHub repo
+  //    If Vercel's GitHub App isn't installed on the GitHub account,
+  //    this call (and the deploy below) will return "repository can't be found".
+  //    Fix: go to https://vercel.com/account/git → Install GitHub App → grant
+  //    access to the anthonynjenga2020 account (or all repos).
   const projectRes = await fetch(`${baseUrl}/v9/projects${teamParam}`, {
     method: 'POST',
     headers,
@@ -399,7 +409,7 @@ async function deployToVercel(repoName: string): Promise<string> {
       framework: 'vite',
       gitRepository: {
         type: 'github',
-        repo: `${githubOrg}/${repoName}`,
+        repo: fullRepo,
       },
       buildCommand: 'npm run build',
       outputDirectory: 'dist',
@@ -407,20 +417,40 @@ async function deployToVercel(repoName: string): Promise<string> {
     }),
   })
 
-  if (!projectRes.ok) {
-    // Project might already exist — try to get it
-    const err = await projectRes.text()
-    console.warn(`[deployToVercel] Project create warning: ${err}`)
+  let projectId: string
+  if (projectRes.ok) {
+    const project = await projectRes.json()
+    projectId = project.id
+    console.log(`[deployToVercel] Project created: ${projectId}`)
+  } else {
+    const projectErr = await projectRes.text()
+    // 409 = project name already exists — that's fine, just grab its ID
+    if (projectRes.status === 409) {
+      console.warn(`[deployToVercel] Project already exists, fetching ID...`)
+      const getRes = await fetch(`${baseUrl}/v9/projects/${repoName}${teamParam}`, { headers })
+      if (!getRes.ok) {
+        throw new Error(`Could not fetch existing Vercel project "${repoName}": ${await getRes.text()}`)
+      }
+      const existing = await getRes.json()
+      projectId = existing.id
+    } else {
+      // Any other error (401, 404 "repo not found", etc.) — surface the full message
+      throw new Error(
+        `Failed to create Vercel project for GitHub repo "${fullRepo}".\n` +
+        `Vercel error: ${projectErr}\n\n` +
+        `Most likely fix: install the Vercel GitHub App at https://vercel.com/account/git ` +
+        `and grant it access to the "${githubOrg}" GitHub account.`
+      )
+    }
   }
 
-  const project = projectRes.ok ? await projectRes.json() : { id: repoName }
-
-  // 2. Trigger deployment
+  // 2. Trigger deployment from the main branch
   const deployRes = await fetch(`${baseUrl}/v13/deployments${teamParam}`, {
     method: 'POST',
     headers,
     body: JSON.stringify({
       name: repoName,
+      target: 'production',
       gitSource: {
         type: 'github',
         org: githubOrg,
@@ -436,13 +466,17 @@ async function deployToVercel(repoName: string): Promise<string> {
   })
 
   if (!deployRes.ok) {
-    const err = await deployRes.text()
-    throw new Error(`Vercel deployment failed: ${err}`)
+    const deployErr = await deployRes.text()
+    throw new Error(
+      `Vercel deployment trigger failed for project "${repoName}".\n` +
+      `Vercel error: ${deployErr}`
+    )
   }
 
   const deployment = await deployRes.json()
+  console.log(`[deployToVercel] Deployment queued: ${deployment.url}`)
 
-  // Return the deployment URL (Vercel gives *.vercel.app)
+  // Return the canonical production URL
   return `https://${deployment.url ?? `${repoName}.vercel.app`}`
 }
 
