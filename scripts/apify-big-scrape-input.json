@@ -187,11 +187,21 @@
     "gym Rubavu Rwanda",
     "gym Musanze Rwanda",
     "gym Huye Rwanda",
-    "gym Muhanga Rwanda"
+    "gym Muhanga Rwanda",
+
+    "boxing club Nairobi",
+    "boxing club Kampala",
+    "boxing club Dar es Salaam",
+    "martial arts Nairobi",
+    "martial arts Kampala",
+    "martial arts Dar es Salaam",
+    "personal trainer Nairobi",
+    "dance studio Nairobi",
+    "dance studio Kampala"
 
   ],
 
-  "maxCrawledPlacesPerSearch": 20,
+  "maxCrawledPlacesPerSearch": 100,
   "language": "en",
   "maxImages": 0,
   "exportPlaceUrls": true,
@@ -202,5 +212,5 @@
   "reviewsSort": "newest",
   "maxReviews": 0,
   "scrapeDirectories": false,
-  "deeperCityScrape": false
+  "deeperCityScrape": true
 }

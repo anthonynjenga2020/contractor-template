@@ -154,21 +154,23 @@ async function run() {
 
   console.log(`\n⬆️   Uploading to Supabase in batches of ${BATCH}...`);
 
-  for (let i = 0; i < leads.length; i += BATCH) {
-    const batch = leads.slice(i, i + BATCH);
-
-    const { data, error } = await supabase
+  for (const lead of leads) {
+    const { data: existing } = await supabase
       .from("leads")
-      .insert(batch)
-      .select("id");
+      .select("id")
+      .eq("gym_name", lead.gym_name)
+      .maybeSingle();
 
-    if (error) {
-      console.error(`  ⚠️  Batch ${Math.floor(i/BATCH)+1} error:`, error.message);
-      errors += batch.length;
-    } else {
-      inserted += data?.length ?? 0;
-      process.stdout.write(`  Batch ${Math.floor(i/BATCH)+1}/${Math.ceil(leads.length/BATCH)}: ${data?.length ?? 0} inserted\n`);
+    if (!existing) {
+      const { error } = await supabase.from("leads").insert(lead);
+      if (error) {
+        console.error(`  ⚠️  Error inserting ${lead.gym_name}:`, error.message);
+        errors++;
+      } else {
+        inserted++;
+      }
     }
+    await new Promise(r => setTimeout(r, 100));
   }
 
   console.log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);

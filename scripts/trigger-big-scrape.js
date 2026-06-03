@@ -70,7 +70,7 @@ const webhookConfig = [
 async function triggerRun() {
   console.log("🚀  Triggering Apify run...");
 
-  const url = new URL("https://api.apify.com/v2/acts/compass~google-maps-scraper/runs");
+  const url = new URL("https://api.apify.com/v2/acts/compass~crawler-google-places/runs");
   url.searchParams.set("token", APIFY_TOKEN);
   url.searchParams.set("webhooks", Buffer.from(JSON.stringify(webhookConfig)).toString("base64"));
 

@@ -254,7 +254,7 @@ Deno.serve(async (req: Request) => {
 
   // Fetch dataset items from Apify
   const apifyToken = Deno.env.get("APIFY_API_TOKEN");
-  const datasetUrl = `https://api.apify.com/v2/datasets/${datasetId}/items?token=${apifyToken}&format=json&limit=200`;
+  const datasetUrl = `https://api.apify.com/v2/datasets/${datasetId}/items?token=${apifyToken}&format=json`;
 
   let rawItems: unknown[];
   try {
