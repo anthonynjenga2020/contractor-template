@@ -1,5 +1,6 @@
+import { useMemo } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import config from './config/gym.config.json'
+import defaultConfig from './config/gym.config.json'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import WhatsAppButton from './components/WhatsAppButton.jsx'
@@ -12,7 +13,7 @@ import TrainerPage from './pages/TrainerPage.jsx'
 import ReviewPage from './pages/ReviewPage.jsx'
 
 // Hide navbar/footer/whatsapp button on the /review page
-function Layout({ children }) {
+function Layout({ children, config }) {
   const { pathname } = useLocation()
   const isReview = pathname === '/review'
   return (
@@ -26,9 +27,24 @@ function Layout({ children }) {
 }
 
 export default function App() {
+  const config = useMemo(() => {
+    const searchParams = new URLSearchParams(window.location.search)
+    const gymQuery = searchParams.get('gym')
+    
+    if (gymQuery) {
+      const newConfig = { ...defaultConfig }
+      newConfig.gymName = gymQuery
+      // Also replace Ironclad Fitness in the default messages/descriptions
+      newConfig.whatsappMessage = newConfig.whatsappMessage.replace("Ironclad Fitness", gymQuery)
+      newConfig.aboutDescription = newConfig.aboutDescription.replace("Ironclad Fitness", gymQuery)
+      return newConfig
+    }
+    return defaultConfig
+  }, [])
+
   return (
     <BrowserRouter>
-      <Layout>
+      <Layout config={config}>
         <Routes>
           <Route path="/"                    element={<HomePage    config={config} />} />
           <Route path="/classes"             element={<ClassesPage config={config} />} />

@@ -34,7 +34,7 @@ const features = [
     color: '#4C9FFF',
     label: 'Missed Call Text-Back',
     title: 'Never Lose a Lead to Voicemail',
-    desc: "If a potential member calls and nobody picks up, they automatically get a WhatsApp message within 60 seconds: 'Hey! We missed your call at Ironclad. How can we help?' Most leads are won or lost in that first minute.",
+    desc: "If a potential member calls and nobody picks up, they automatically get a WhatsApp message within 60 seconds: 'Hey! We missed your call. How can we help?' Most leads are won or lost in that first minute.",
     highlight: 'Responds in 60 sec',
   },
   {
