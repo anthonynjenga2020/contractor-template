@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 export default function Navbar({ config }) {
   const [scrolled, setScrolled] = useState(false)
@@ -19,6 +20,7 @@ export default function Navbar({ config }) {
     { label: 'About', href: '/#about' },
     { label: 'Classes', href: '/classes' },
     { label: 'Trainers', href: '/trainers' },
+    { label: 'Shop', href: '/shop' },
     { label: 'Pricing', href: '/#pricing' },
     { label: 'Contact', href: '/#contact' },
   ]
@@ -53,31 +55,41 @@ export default function Navbar({ config }) {
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) =>
-            isExternal(link.href) ? (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-gray-400 hover:text-white text-sm font-medium uppercase tracking-widest transition-colors duration-200"
-              >
-                {link.label}
-              </a>
-            ) : (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`text-sm font-medium uppercase tracking-widest transition-colors duration-200 ${
-                  location.pathname === link.href ? 'text-white' : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                {link.label}
-              </Link>
-            )
-          )}
+          {navLinks.map((link, i) => (
+            <motion.div
+              key={link.href}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+            >
+              {isExternal(link.href) ? (
+                <a
+                  href={link.href}
+                  className="text-gray-400 hover:text-white text-sm font-medium uppercase tracking-widest transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  to={link.href}
+                  className={`text-sm font-medium uppercase tracking-widest transition-colors duration-200 ${
+                    location.pathname === link.href ? 'text-white' : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )}
+            </motion.div>
+          ))}
         </div>
 
         {/* CTA */}
-        <div className="hidden lg:block">
+        <motion.div 
+          className="hidden lg:block"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
+        >
           <a
             href="#free-trial"
             className="btn-primary px-6 py-3 rounded-sm text-sm"
@@ -90,7 +102,7 @@ export default function Navbar({ config }) {
           >
             Free Trial
           </a>
-        </div>
+        </motion.div>
 
         {/* Mobile menu button */}
         <button

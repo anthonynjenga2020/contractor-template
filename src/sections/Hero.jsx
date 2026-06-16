@@ -1,22 +1,38 @@
-import { useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Hero({ config }) {
-  const headlineRef = useRef(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const SLIDES = [
+    {
+      image: config.heroImageUrl || "/gym (1).jpg",
+      headline: config.gymName.split(' ')[0],
+      subHeadline: config.gymName.split(' ').slice(1).join(' ') || 'GYM',
+      tagline: config.tagline,
+      subTagline: config.subTagline
+    },
+    {
+      image: "/gym (2).jpg",
+      headline: "Push Past",
+      subHeadline: "Your Limits",
+      tagline: "Expert trainers, state-of-the-art equipment.",
+      subTagline: "We provide everything you need to succeed and conquer your goals."
+    },
+    {
+      image: "/gym (4).jpg",
+      headline: "Embrace The",
+      subHeadline: "Grind",
+      tagline: "Transform your body, mind, and spirit.",
+      subTagline: "Start your fitness journey with us today and never look back."
+    }
+  ]
 
   useEffect(() => {
-    // Stagger animate children
-    const el = headlineRef.current
-    if (!el) return
-    const children = el.querySelectorAll('.hero-anim')
-    children.forEach((child, i) => {
-      child.style.opacity = '0'
-      child.style.transform = 'translateY(30px)'
-      setTimeout(() => {
-        child.style.transition = 'opacity 0.7s ease, transform 0.7s ease'
-        child.style.opacity = '1'
-        child.style.transform = 'translateY(0)'
-      }, 100 + i * 120)
-    })
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDES.length)
+    }, 6000)
+    return () => clearInterval(timer)
   }, [])
 
   return (
@@ -25,16 +41,27 @@ export default function Hero({ config }) {
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{ backgroundColor: 'var(--bg)' }}
     >
-      {/* Background image with overlay */}
+      {/* Background Images Carousel */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={config.heroImageUrl}
-          alt={config.gymName}
-          className="w-full h-full object-cover object-center"
-        />
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/85 to-[#0A0A0A]/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <img
+              src={SLIDES[currentSlide].image}
+              alt={SLIDES[currentSlide].headline}
+              className="w-full h-full object-cover object-center"
+            />
+            {/* Dark gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/85 to-[#0A0A0A]/40" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Glowing orb */}
@@ -54,9 +81,14 @@ export default function Hero({ config }) {
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-32 pb-20 w-full">
-        <div ref={headlineRef} className="max-w-3xl">
+        <div className="max-w-3xl">
           {/* Eyebrow */}
-          <div className="hero-anim flex items-center gap-3 mb-6">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="flex items-center gap-3 mb-6"
+          >
             <div className="h-px w-12" style={{ backgroundColor: 'var(--primary)' }} />
             <span
               className="text-xs font-bold uppercase tracking-[0.3em]"
@@ -64,31 +96,46 @@ export default function Hero({ config }) {
             >
               {config.location}
             </span>
-          </div>
+          </motion.div>
 
-          {/* Main Headline */}
-          <h1 className="hero-anim font-headline font-black uppercase leading-[0.9] tracking-tight mb-6">
-            <span className="block text-white text-5xl sm:text-7xl lg:text-8xl xl:text-9xl">
-              {config.gymName.split(' ')[0]}
-            </span>
-            <span
-              className="block text-6xl sm:text-8xl lg:text-9xl xl:text-[10rem]"
-              style={{ color: 'var(--primary)' }}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              {config.gymName.split(' ').slice(1).join(' ') || 'GYM'}
-            </span>
-          </h1>
+              {/* Main Headline */}
+              <h1 className="font-headline font-black uppercase leading-[0.9] tracking-tight mb-6">
+                <span className="block text-white text-5xl sm:text-7xl lg:text-8xl xl:text-9xl">
+                  {SLIDES[currentSlide].headline}
+                </span>
+                <span
+                  className="block text-6xl sm:text-8xl lg:text-9xl xl:text-[10rem]"
+                  style={{ color: 'var(--primary)' }}
+                >
+                  {SLIDES[currentSlide].subHeadline}
+                </span>
+              </h1>
 
-          {/* Tagline */}
-          <p className="hero-anim text-gray-300 text-xl sm:text-2xl font-medium italic mb-3 pl-1">
-            "{config.tagline}"
-          </p>
-          <p className="hero-anim text-gray-500 text-base sm:text-lg font-light mb-10 pl-1 max-w-xl">
-            {config.subTagline}
-          </p>
+              {/* Tagline */}
+              <p className="text-gray-300 text-xl sm:text-2xl font-medium italic mb-3 pl-1">
+                "{SLIDES[currentSlide].tagline}"
+              </p>
+              <p className="text-gray-500 text-base sm:text-lg font-light mb-10 pl-1 max-w-xl">
+                {SLIDES[currentSlide].subTagline}
+              </p>
+            </motion.div>
+          </AnimatePresence>
 
           {/* CTAs */}
-          <div className="hero-anim flex flex-wrap gap-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="flex flex-wrap gap-4"
+          >
             <a
               href="#pricing"
               className="btn-primary px-8 py-4 rounded-sm text-base inline-block"
@@ -101,10 +148,32 @@ export default function Hero({ config }) {
             >
               See Our Classes
             </a>
-          </div>
+          </motion.div>
+
+          {/* Carousel Indicators */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="flex gap-3 mt-12"
+          >
+            {SLIDES.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                className={`h-1.5 rounded-full transition-all duration-500 ${idx === currentSlide ? 'w-12 bg-primary' : 'w-4 bg-white/20 hover:bg-white/40'}`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </motion.div>
 
           {/* Trust bar */}
-          <div className="hero-anim flex flex-wrap gap-6 mt-12 pt-10 border-t border-white/10">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="flex flex-wrap gap-6 mt-12 pt-10 border-t border-white/10"
+          >
             {(config.stats ?? []).map((stat, i) => (
               <div key={i} className="flex items-center gap-3">
                 <span className="font-headline font-black text-2xl" style={{ color: 'var(--primary)' }}>
@@ -118,7 +187,7 @@ export default function Hero({ config }) {
                 )}
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 

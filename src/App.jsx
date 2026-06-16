@@ -11,6 +11,8 @@ import ClassesPage from './pages/ClassesPage.jsx'
 import TrainersPage from './pages/TrainersPage.jsx'
 import TrainerPage from './pages/TrainerPage.jsx'
 import ReviewPage from './pages/ReviewPage.jsx'
+import ShopPage from './pages/ShopPage.jsx'
+import { AnimatePresence } from 'framer-motion'
 
 // Hide navbar/footer/whatsapp button on the /review page
 function Layout({ children, config }) {
@@ -30,13 +32,22 @@ export default function App() {
   const config = useMemo(() => {
     const searchParams = new URLSearchParams(window.location.search)
     const gymQuery = searchParams.get('gym')
+    const locationQuery = searchParams.get('location')
     
-    if (gymQuery) {
+    if (gymQuery || locationQuery) {
       const newConfig = { ...defaultConfig }
-      newConfig.gymName = gymQuery
-      // Also replace Ironclad Fitness in the default messages/descriptions
-      newConfig.whatsappMessage = newConfig.whatsappMessage.replace("Ironclad Fitness", gymQuery)
-      newConfig.aboutDescription = newConfig.aboutDescription.replace("Ironclad Fitness", gymQuery)
+      
+      if (gymQuery) {
+        newConfig.gymName = gymQuery
+        // Replace all instances of Ironclad Fitness in messages and descriptions
+        newConfig.whatsappMessage = newConfig.whatsappMessage.replace(/Ironclad Fitness/g, gymQuery)
+        newConfig.aboutDescription = newConfig.aboutDescription.replace(/Ironclad Fitness/g, gymQuery)
+      }
+      
+      if (locationQuery) {
+        newConfig.location = locationQuery
+      }
+      
       return newConfig
     }
     return defaultConfig
@@ -45,13 +56,16 @@ export default function App() {
   return (
     <BrowserRouter>
       <Layout config={config}>
-        <Routes>
-          <Route path="/"                    element={<HomePage    config={config} />} />
-          <Route path="/classes"             element={<ClassesPage config={config} />} />
-          <Route path="/trainers"            element={<TrainersPage config={config} />} />
-          <Route path="/trainers/:trainerId" element={<TrainerPage  config={config} />} />
-          <Route path="/review"              element={<ReviewPage   config={config} />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/"                    element={<HomePage    config={config} />} />
+            <Route path="/classes"             element={<ClassesPage config={config} />} />
+            <Route path="/trainers"            element={<TrainersPage config={config} />} />
+            <Route path="/trainers/:trainerId" element={<TrainerPage  config={config} />} />
+            <Route path="/shop"                element={<ShopPage     config={config} />} />
+            <Route path="/review"              element={<ReviewPage   config={config} />} />
+          </Routes>
+        </AnimatePresence>
       </Layout>
     </BrowserRouter>
   )
