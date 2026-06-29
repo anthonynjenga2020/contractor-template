@@ -1,0 +1,129 @@
+{
+  "businessId": "demo-landscaping",
+  "businessName": "OASIS LANDSCAPING",
+  "tagline": "Transforming Outdoor Spaces.",
+  "subTagline": "Nairobi's premier landscaping and hardscaping contractors. We build outdoor living areas that last.",
+  "phone": "+254 700 000 000",
+  "email": "hello@oasislandscaping.co.ke",
+  "location": "Karen, Nairobi, Kenya",
+  "googleMapsEmbed": "https://maps.google.com/maps?q=Karen+Nairobi&output=embed",
+  "logoUrl": "",
+  "heroImageUrl": "https://images.unsplash.com/photo-1558904541-efa843a96f0f?w=1200&q=80",
+  "aboutImageUrl": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80",
+  "galleryImages": [
+    "https://images.unsplash.com/photo-1558905628-9426f43697eb?w=600&q=80",
+    "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600&q=80",
+    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80",
+    "https://images.unsplash.com/photo-1558904541-efa843a96f0f?w=600&q=80",
+    "https://images.unsplash.com/photo-1598902108854-10e335adac99?w=600&q=80",
+    "https://images.unsplash.com/photo-1592424001835-188849b291d9?w=600&q=80"
+  ],
+  "primaryColor": "#10B981",
+  "primaryDark": "#059669",
+  "accentColor": "#FFFFFF",
+  "bgColor": "#0A0A0A",
+  "surfaceColor": "#141414",
+  "borderColor": "#222222",
+  "templateVariant": "V2",
+  "stats": [
+    { "value": "150+", "label": "Projects Completed" },
+    { "value": "10", "label": "Years Experience" },
+    { "value": "5★", "label": "Google Rating" },
+    { "value": "100%", "label": "Client Satisfaction" }
+  ],
+  "aboutTitle": "We Don't Just Plant Trees. We Build Experiences.",
+  "aboutDescription": "Oasis Landscaping was built for homeowners who want more from their outdoors. From complete garden redesigns to elegant hardscaping and reliable maintenance, our team of experts turns your vision into a reality.\n\nWhether you need a new patio for entertaining or a serene garden retreat — we deliver quality that lasts.",
+  "services": [
+    { "name": "Landscape Design", "icon": "", "desc": "Custom 3D designs and planning to bring your dream garden to life before we even break ground.", "image": "https://images.unsplash.com/photo-1558905628-9426f43697eb?w=800&q=80" },
+    { "name": "Hardscaping", "icon": "", "desc": "Patios, walkways, retaining walls, and outdoor kitchens built with premium stone and pavers.", "image": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=800&q=80" },
+    { "name": "Lawn Installation", "icon": "", "desc": "Premium sod installation, seeding, and artificial turf options for a lush, green lawn year-round.", "image": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80" },
+    { "name": "Irrigation Systems", "icon": "", "desc": "Smart sprinkler systems and drip irrigation to keep your landscape healthy while saving water.", "image": "https://images.unsplash.com/photo-1598902108854-10e335adac99?w=800&q=80" }
+  ],
+  "recentProjects": [
+    {
+      "name": "The Karen Estate Redesign",
+      "tagline": "Complete front and backyard overhaul including custom stone patio.",
+      "duration": "4 Weeks",
+      "budget": "Ksh 850,000",
+      "icon": "",
+      "includes": ["3D Design", "Sod Installation", "Custom Pavers", "Outdoor Lighting", "Native Plantings"]
+    },
+    {
+      "name": "Lavington Modern Garden",
+      "tagline": "Minimalist, low-maintenance garden design with artificial turf and sleek planters.",
+      "duration": "2 Weeks",
+      "budget": "Ksh 450,000",
+      "icon": "",
+      "includes": ["Artificial Turf", "Concrete Planters", "Drip Irrigation", "Gravel Pathways"]
+    }
+  ],
+  "beforeAfter": [
+    {
+      "name": "Backyard Patio Addition",
+      "duration": "3 weeks",
+      "statBefore": "Muddy, unusable yard",
+      "statAfter": "Custom stone patio & fire pit",
+      "change": "Full Transformation",
+      "highlight": "Added 400 sq ft of living space",
+      "quote": "The team at Oasis completely changed how we use our home. We went from never going in the backyard to hosting braais every weekend. Highly professional crew.",
+      "program": "Hardscaping & Lawn"
+    }
+  ],
+  "team": [
+    {
+      "id": "david-mutua",
+      "name": "David Mutua",
+      "specialty": "Lead Landscape Architect",
+      "experience": "12 Years",
+      "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
+      "coverImage": "https://images.unsplash.com/photo-1558904541-efa843a96f0f?w=1200&q=80",
+      "bio": "David leads our design team, bringing over a decade of experience in crafting beautiful, sustainable outdoor spaces in Kenya. He works closely with clients to ensure their vision is realized perfectly.",
+      "certifications": ["BSc Landscape Architecture", "Certified Arborist"],
+      "specialties": ["3D Landscape Design", "Native Plant Selection", "Sustainable Landscaping"],
+      "availableDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "quote": "A great landscape doesn't just look good; it feels right."
+    }
+  ],
+  "testimonials": [
+    { "name": "Sarah K.", "rating": 5, "platform": "Google", "text": "Incredible work by the Oasis team. They were on time, stuck to the budget, and the new patio looks stunning. Highly recommended!", "date": "Jan 2025" },
+    { "name": "Michael N.", "rating": 5, "platform": "Google", "text": "We hired them for a complete lawn renovation and irrigation install. The difference is night and day. Very professional crew.", "date": "Feb 2025" }
+  ],
+  "faqs": [
+    { "q": "Do you provide free estimates?", "a": "Yes, we offer free, no-obligation site visits and estimates for all potential projects." },
+    { "q": "How long does a typical project take?", "a": "It depends on the scope. A simple lawn installation might take a few days, while a full backyard redesign with hardscaping can take 3-4 weeks. We'll give you a clear timeline during the estimate." },
+    { "q": "Do you offer ongoing maintenance?", "a": "Yes! We offer weekly and bi-weekly maintenance packages to keep your new landscape looking perfect year-round." }
+  ],
+  "process": [
+    {
+      "name": "Consultation & Estimate",
+      "description": "We visit your property, listen to your ideas, and provide a detailed, transparent estimate.",
+      "icon": "clipboard"
+    },
+    {
+      "name": "Design & Planning",
+      "description": "For larger projects, we create custom 3D designs so you can see exactly what you're getting before we start.",
+      "icon": "pen"
+    },
+    {
+      "name": "Installation",
+      "description": "Our professional crew arrives on time, works efficiently, and keeps the site clean throughout the build.",
+      "icon": "hammer"
+    }
+  ],
+  "socialLinks": {
+    "instagram": "https://instagram.com/",
+    "facebook": "https://facebook.com/",
+    "whatsapp": "https://wa.me/254700000000",
+    "tiktok": ""
+  },
+  "whatsappNumber": "254700000000",
+  "whatsappMessage": "Hi! I'd like to get a free estimate from Oasis Landscaping.",
+  "trialCTA": "Get a Free Estimate",
+  "paystackPublicKey": "",
+  "deployedUrl": "",
+  "vercelProjectId": "",
+  "supabaseRowId": "",
+  "googlePlaceId": "",
+  "googleReviewUrl": "",
+  "seoDescription": ""
+}

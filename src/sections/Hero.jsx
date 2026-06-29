@@ -6,25 +6,25 @@ export default function Hero({ config }) {
 
   const SLIDES = [
     {
-      image: config.heroImageUrl || "/gym (1).jpg",
-      headline: config.gymName.split(' ')[0],
-      subHeadline: config.gymName.split(' ').slice(1).join(' ') || 'GYM',
+      image: config.heroImageUrl || "https://images.unsplash.com/photo-1558904541-efa843a96f0f?w=1200&q=80",
+      headline: config.businessName.split(' ')[0],
+      subHeadline: config.businessName.split(' ').slice(1).join(' ') || 'LANDSCAPING',
       tagline: config.tagline,
       subTagline: config.subTagline
     },
     {
-      image: "/gym (2).jpg",
-      headline: "Push Past",
-      subHeadline: "Your Limits",
-      tagline: "Expert trainers, state-of-the-art equipment.",
-      subTagline: "We provide everything you need to succeed and conquer your goals."
+      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200&q=80",
+      headline: "Design Your",
+      subHeadline: "Dream Space",
+      tagline: "Expert designers, premium materials.",
+      subTagline: "We provide everything you need to build the perfect outdoor living area."
     },
     {
-      image: "/gym (4).jpg",
-      headline: "Embrace The",
-      subHeadline: "Grind",
-      tagline: "Transform your body, mind, and spirit.",
-      subTagline: "Start your fitness journey with us today and never look back."
+      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1200&q=80",
+      headline: "Quality That",
+      subHeadline: "Lasts",
+      tagline: "Transform your home's curb appeal.",
+      subTagline: "Start your landscaping project with us today and enjoy it for years to come."
     }
   ]
 
@@ -137,16 +137,16 @@ export default function Hero({ config }) {
             className="flex flex-wrap gap-4"
           >
             <a
-              href="#pricing"
+              href="#process"
               className="btn-primary px-8 py-4 rounded-sm text-base inline-block"
             >
               {config.trialCTA}
             </a>
             <a
-              href="#classes"
+              href="#services"
               className="btn-outline px-8 py-4 rounded-sm text-base inline-block"
             >
-              See Our Classes
+              View Our Services
             </a>
           </motion.div>
 

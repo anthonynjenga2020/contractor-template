@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useReveal } from '../hooks/useReveal.js'
 
-export default function Classes({ config }) {
+export default function CoreServices({ config }) {
   const headerRef = useReveal()
   const gridRef = useReveal()
 
   return (
-    <section id="classes" className="py-28 lg:py-40" style={{ backgroundColor: 'var(--surface)' }}>
+    <section id="services" className="py-28 lg:py-40" style={{ backgroundColor: 'var(--surface)' }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         {/* Header */}
         <div ref={headerRef} className="section-reveal flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16">
@@ -18,11 +18,11 @@ export default function Classes({ config }) {
               </span>
             </div>
             <h2 className="font-headline font-black text-4xl sm:text-5xl lg:text-6xl text-white uppercase leading-tight">
-              Classes &<br />Services
+              Our Core<br />Services
             </h2>
           </div>
           <p className="text-gray-500 text-base max-w-md lg:text-right">
-            From beginner-friendly sessions to elite training — we've got a class for every goal, every level, every schedule.
+            Comprehensive landscaping and hardscaping solutions designed to transform your outdoor space and bring your vision to life.
           </p>
         </div>
 
@@ -69,19 +69,19 @@ export default function Classes({ config }) {
         {/* Bottom CTA */}
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
-            to="/classes"
+            to="/services"
             className="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-sm text-sm"
           >
-            View Full Schedule →
+            View All Services →
           </Link>
           <a
-            href="#free-trial"
+            href="#contact"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-sm text-sm font-black uppercase tracking-widest border transition-all"
             style={{ borderColor: 'var(--border)', color: 'var(--primary)' }}
-            onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.backgroundColor = 'rgba(255,78,26,0.08)' }}
+            onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.backgroundColor = 'rgba(16, 185, 129, 0.08)' }}
             onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.backgroundColor = 'transparent' }}
           >
-            Try a Class Free
+            Request a Quote
           </a>
         </div>
       </div>

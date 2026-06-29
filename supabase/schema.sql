@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS intake_submissions (
   updated_at          TIMESTAMPTZ DEFAULT NOW(),
 
   -- Basic business info
-  gym_name            TEXT NOT NULL,
+  business_name       TEXT NOT NULL,
+  niche               TEXT DEFAULT 'gym',     -- e.g. 'gym', 'contractor', 'salon'
   owner_name          TEXT NOT NULL,
   email               TEXT NOT NULL,
   phone               TEXT NOT NULL,          -- WhatsApp preferred
@@ -85,16 +86,17 @@ CREATE INDEX IF NOT EXISTS idx_intake_created   ON intake_submissions(created_at
 
 
 -- ============================================================
--- TABLE: gym_clients
+-- TABLE: clients
 -- Active paying clients. Created after a submission deploys.
 -- ============================================================
-CREATE TABLE IF NOT EXISTS gym_clients (
+CREATE TABLE IF NOT EXISTS clients (
   id                    UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   created_at            TIMESTAMPTZ DEFAULT NOW(),
   updated_at            TIMESTAMPTZ DEFAULT NOW(),
 
   -- Identity
-  gym_name              TEXT NOT NULL,
+  business_name         TEXT NOT NULL,
+  niche                 TEXT DEFAULT 'gym',
   owner_name            TEXT NOT NULL,
   email                 TEXT NOT NULL,
   phone                 TEXT NOT NULL,
@@ -119,14 +121,14 @@ CREATE TABLE IF NOT EXISTS gym_clients (
   referred_by           TEXT
 );
 
-DROP TRIGGER IF EXISTS gym_clients_updated_at ON gym_clients;
-CREATE TRIGGER gym_clients_updated_at
-  BEFORE UPDATE ON gym_clients
+DROP TRIGGER IF EXISTS clients_updated_at ON clients;
+CREATE TRIGGER clients_updated_at
+  BEFORE UPDATE ON clients
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
-CREATE INDEX IF NOT EXISTS idx_clients_status   ON gym_clients(subscription_status);
-CREATE INDEX IF NOT EXISTS idx_clients_email    ON gym_clients(email);
-CREATE INDEX IF NOT EXISTS idx_clients_billing  ON gym_clients(next_billing_date);
+CREATE INDEX IF NOT EXISTS idx_clients_status   ON clients(subscription_status);
+CREATE INDEX IF NOT EXISTS idx_clients_email    ON clients(email);
+CREATE INDEX IF NOT EXISTS idx_clients_billing  ON clients(next_billing_date);
 
 
 -- ============================================================
@@ -139,7 +141,8 @@ CREATE TABLE IF NOT EXISTS leads (
   updated_at      TIMESTAMPTZ DEFAULT NOW(),
 
   -- Scraped data
-  gym_name        TEXT NOT NULL,
+  business_name   TEXT NOT NULL,
+  niche           TEXT DEFAULT 'gym',
   phone           TEXT,
   address         TEXT,
   neighborhood    TEXT,                         -- e.g. "Westlands", "Karen"
@@ -175,10 +178,10 @@ CREATE TABLE IF NOT EXISTS leads (
   notes               TEXT,
 
   -- If they converted
-  client_id           UUID REFERENCES gym_clients(id) ON DELETE SET NULL,
+  client_id           UUID REFERENCES clients(id) ON DELETE SET NULL,
 
   -- Deduplication — required for upsert resolution=ignore-duplicates
-  UNIQUE (gym_name, address)
+  UNIQUE (business_name, address)
 );
 
 DROP TRIGGER IF EXISTS leads_updated_at ON leads;
@@ -200,7 +203,7 @@ CREATE INDEX IF NOT EXISTS idx_leads_website    ON leads(has_website);
 -- ============================================================
 
 ALTER TABLE intake_submissions  ENABLE ROW LEVEL SECURITY;
-ALTER TABLE gym_clients         ENABLE ROW LEVEL SECURITY;
+ALTER TABLE clients             ENABLE ROW LEVEL SECURITY;
 ALTER TABLE leads               ENABLE ROW LEVEL SECURITY;
 
 -- Allow anonymous form submissions (public intake form)
@@ -208,8 +211,8 @@ DROP POLICY IF EXISTS "anon_can_insert_intake"   ON intake_submissions;
 DROP POLICY IF EXISTS "anon_cannot_read_intake"  ON intake_submissions;
 DROP POLICY IF EXISTS "auth_can_read_intake"     ON intake_submissions;
 DROP POLICY IF EXISTS "auth_can_update_intake"   ON intake_submissions;
-DROP POLICY IF EXISTS "auth_can_read_clients"    ON gym_clients;
-DROP POLICY IF EXISTS "auth_can_all_clients"     ON gym_clients;
+DROP POLICY IF EXISTS "auth_can_read_clients"    ON clients;
+DROP POLICY IF EXISTS "auth_can_all_clients"     ON clients;
 DROP POLICY IF EXISTS "auth_can_all_leads"       ON leads;
 
 CREATE POLICY "anon_can_insert_intake"
@@ -236,12 +239,12 @@ CREATE POLICY "auth_can_update_intake"
   USING (true);
 
 CREATE POLICY "auth_can_read_clients"
-  ON gym_clients FOR SELECT
+  ON clients FOR SELECT
   TO authenticated
   USING (true);
 
 CREATE POLICY "auth_can_all_clients"
-  ON gym_clients FOR ALL
+  ON clients FOR ALL
   TO authenticated
   USING (true);
 
@@ -258,7 +261,8 @@ CREATE POLICY "auth_can_all_leads"
 CREATE OR REPLACE VIEW pipeline_status AS
 SELECT
   s.id,
-  s.gym_name,
+  s.business_name,
+  s.niche,
   s.owner_name,
   s.email,
   s.phone,
@@ -272,5 +276,5 @@ SELECT
   c.monthly_fee,
   c.next_billing_date
 FROM intake_submissions s
-LEFT JOIN gym_clients c ON c.intake_id = s.id
+LEFT JOIN clients c ON c.intake_id = s.id
 ORDER BY s.created_at DESC;

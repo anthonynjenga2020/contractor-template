@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import config from './config/gym.config.json'
+import config from './config/config.json'
 import { applyTheme } from './themes/themes.js'
 
 // Apply the full theme (colors + fonts + body class) before render

@@ -87,7 +87,7 @@ export default function Contact({ config }) {
                     </svg>
                   ),
                   label: 'Hours',
-                  value: 'Mon–Fri 5am–10pm · Sat–Sun 6am–8pm',
+                  value: 'Mon–Fri 8am–5pm · Sat 9am–2pm',
                 },
               ].map((item, i) => (
                 <div

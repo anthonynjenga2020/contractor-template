@@ -41,7 +41,7 @@ Deno.serve(async (req: Request) => {
     const body = await req.json()
     const record = body.record ?? body // handle both webhook formats
 
-    console.log(`[on-intake-submit] Processing submission for: ${record.gym_name}`)
+    console.log(`[on-intake-submit] Processing submission for: ${record.business_name}`)
 
     // 1. Mark as generating (shows "Building" in the dashboard)
     await updateStatus(record.id, 'generating')
@@ -55,8 +55,9 @@ Deno.serve(async (req: Request) => {
     console.log('[on-intake-submit] Config generated')
 
     // 4. Create GitHub repo from template
-    const repoName = `gym-${record.id.split('-')[0]}` // e.g. gym-3b8cf7bf
-    const repoUrl = await createGithubRepo(repoName, config)
+    const nichePrefix = record.niche || 'business'
+    const repoName = `${nichePrefix}-${record.id.split('-')[0]}` // e.g. contractor-3b8cf7bf
+    const repoUrl = await createGithubRepo(repoName, config, record.niche)
     console.log(`[on-intake-submit] Repo created: ${repoUrl}`)
 
     // 5. Deploy to Vercel
@@ -129,7 +130,7 @@ async function uploadMedia(record: Record<string, any>) {
       }
 
       const ext = mimeType.split('/')[1] ?? 'jpg'
-      const fileName = `${record.gym_name.replace(/\s+/g, '-').toLowerCase()}-${name}.${ext}`
+      const fileName = `${record.business_name.replace(/\s+/g, '-').toLowerCase()}-${name}.${ext}`
       return await uploadToJengaDrive(buffer, fileName, mimeType)
 
     } catch (err) {
@@ -167,12 +168,13 @@ function buildConfig(
   record: Record<string, any>,
   mediaUrls: Record<string, any>
 ): Record<string, any> {
-  const gymId = `gym-${record.id.split('-')[0]}`
+  const nichePrefix = record.niche || 'business'
+  const businessId = `${nichePrefix}-${record.id.split('-')[0]}`
 
   return {
-    gymId,
-    gymName: record.gym_name,
-    tagline: record.tagline ?? `${record.gym_name} — Where Results Happen`,
+    businessId,
+    businessName: record.business_name,
+    tagline: record.tagline ?? `${record.business_name} — Where Results Happen`,
     subTagline: '',
     phone: record.phone,
     email: record.email,
@@ -238,8 +240,8 @@ function buildConfig(
       tiktok: record.social_links?.tiktok ?? '',
     },
     whatsappNumber: record.whatsapp_number ?? record.phone.replace(/\D/g, ''),
-    whatsappMessage: `Hi! I'd like to know more about joining ${record.gym_name}.`,
-    trialCTA: 'Claim Your Free 7-Day Trial',
+    whatsappMessage: `Hi! I'd like to know more about working with ${record.business_name}.`,
+    trialCTA: record.niche === 'gym' ? 'Claim Your Free 7-Day Trial' : 'Get a Free Quote',
 
     // Pipeline metadata
     paystackPublicKey: '',
@@ -313,10 +315,19 @@ function convertMapsLinkToEmbed(url: string): string {
 // ─── Step 4: Create GitHub repo from template ────────────────
 async function createGithubRepo(
   repoName: string,
-  config: Record<string, any>
+  config: Record<string, any>,
+  niche?: string
 ): Promise<string> {
   const pat = Deno.env.get('GITHUB_PAT')!
-  const templateRepo = Deno.env.get('GITHUB_TEMPLATE_REPO')! // "owner/repo-name"
+  let templateRepo = Deno.env.get('GITHUB_TEMPLATE_REPO')! // default fallback
+  
+  // Dynamic template routing based on niche
+  if (niche === 'contractor') {
+    templateRepo = Deno.env.get('GITHUB_CONTRACTOR_TEMPLATE_REPO') || 'anthonynjenga2020/jenga-contractor-template'
+  } else if (niche === 'salon') {
+    templateRepo = Deno.env.get('GITHUB_SALON_TEMPLATE_REPO') || 'anthonynjenga2020/jenga-salon-template'
+  }
+
   const [templateOwner, templateRepoName] = templateRepo.split('/')
 
   const headers = {
@@ -335,7 +346,7 @@ async function createGithubRepo(
       body: JSON.stringify({
         owner: templateOwner,
         name: repoName,
-        description: `${config.gymName} — Jenga Systems gym site`,
+        description: `${config.businessName} — Jenga Systems site`,
         private: false,
         include_all_branches: false,
       }),
@@ -356,12 +367,12 @@ async function createGithubRepo(
   // 2. Inject gym.config.json into the repo
   const configContent = toBase64(JSON.stringify(config, null, 2))
   const injectRes = await fetch(
-    `https://api.github.com/repos/${repoFullName}/contents/src/config/gym.config.json`,
+    `https://api.github.com/repos/${repoFullName}/contents/src/config/config.json`,
     {
       method: 'PUT',
       headers,
       body: JSON.stringify({
-        message: `Configure site for ${config.gymName}`,
+        message: `Configure site for ${config.businessName}`,
         content: configContent,
       }),
     }
@@ -493,14 +504,15 @@ async function notifyAnthony(
   // If WhatsApp isn't configured yet, just log
   if (!token || !phoneId || !anthonyNumber) {
     console.log('[notifyAnthony] WhatsApp not configured — skipping notification')
-    console.log(`[notifyAnthony] Deployed: ${record.gym_name} → ${deployedUrl}`)
+    console.log(`[notifyAnthony] Deployed: ${record.business_name} → ${deployedUrl}`)
     return
   }
 
+  const emoji = record.niche === 'gym' ? '🏋️' : (record.niche === 'contractor' ? '🛠️' : '✨')
   const message = [
-    `🏋️ *New Gym Site Deployed!*`,
+    `${emoji} *New ${record.niche || 'Business'} Site Deployed!*`,
     ``,
-    `*${record.gym_name}*`,
+    `*${record.business_name}*`,
     `Owner: ${record.owner_name}`,
     `Phone: ${record.phone}`,
     `Email: ${record.email}`,
