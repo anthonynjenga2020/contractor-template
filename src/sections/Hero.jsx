@@ -1,67 +1,26 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 export default function Hero({ config }) {
-  const [currentSlide, setCurrentSlide] = useState(0)
-
-  const SLIDES = [
-    {
-      image: config.heroImageUrl || "https://images.unsplash.com/photo-1558904541-efa843a96f0f?w=1200&q=80",
-      headline: config.businessName.split(' ')[0],
-      subHeadline: config.businessName.split(' ').slice(1).join(' ') || 'LANDSCAPING',
-      tagline: config.tagline,
-      subTagline: config.subTagline
-    },
-    {
-      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200&q=80",
-      headline: "Design Your",
-      subHeadline: "Dream Space",
-      tagline: "Expert designers, premium materials.",
-      subTagline: "We provide everything you need to build the perfect outdoor living area."
-    },
-    {
-      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1200&q=80",
-      headline: "Quality That",
-      subHeadline: "Lasts",
-      tagline: "Transform your home's curb appeal.",
-      subTagline: "Start your landscaping project with us today and enjoy it for years to come."
-    }
-  ]
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % SLIDES.length)
-    }, 6000)
-    return () => clearInterval(timer)
-  }, [])
-
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{ backgroundColor: 'var(--bg)' }}
     >
-      {/* Background Images Carousel */}
+      {/* Background Video */}
       <div className="absolute inset-0 z-0">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute inset-0"
-          >
-            <img
-              src={SLIDES[currentSlide].image}
-              alt={SLIDES[currentSlide].headline}
-              className="w-full h-full object-cover object-center"
-            />
-            {/* Dark gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/85 to-[#0A0A0A]/40" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
-          </motion.div>
-        </AnimatePresence>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover object-center"
+        >
+          <source src="/scapervid.mp4" type="video/mp4" />
+        </video>
+        {/* Dark gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/85 to-[#0A0A0A]/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
       </div>
 
       {/* Glowing orb */}
@@ -83,7 +42,7 @@ export default function Hero({ config }) {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-32 pb-20 w-full">
         <div className="max-w-3xl">
           {/* Eyebrow */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -98,39 +57,35 @@ export default function Hero({ config }) {
             </span>
           </motion.div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              {/* Main Headline */}
-              <h1 className="font-headline font-black uppercase leading-[0.9] tracking-tight mb-6">
-                <span className="block text-white text-5xl sm:text-7xl lg:text-8xl xl:text-9xl">
-                  {SLIDES[currentSlide].headline}
-                </span>
-                <span
-                  className="block text-6xl sm:text-8xl lg:text-9xl xl:text-[10rem]"
-                  style={{ color: 'var(--primary)' }}
-                >
-                  {SLIDES[currentSlide].subHeadline}
-                </span>
-              </h1>
+          {/* Main Headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          >
+            <h1 className="font-headline font-black uppercase leading-[0.9] tracking-tight mb-6">
+              <span className="block text-white text-5xl sm:text-7xl lg:text-8xl xl:text-9xl">
+                {config.businessName.split(' ')[0]}
+              </span>
+              <span
+                className="block text-6xl sm:text-8xl lg:text-9xl xl:text-[10rem]"
+                style={{ color: 'var(--primary)' }}
+              >
+                {config.businessName.split(' ').slice(1).join(' ') || 'LANDSCAPING'}
+              </span>
+            </h1>
 
-              {/* Tagline */}
-              <p className="text-gray-300 text-xl sm:text-2xl font-medium italic mb-3 pl-1">
-                "{SLIDES[currentSlide].tagline}"
-              </p>
-              <p className="text-gray-500 text-base sm:text-lg font-light mb-10 pl-1 max-w-xl">
-                {SLIDES[currentSlide].subTagline}
-              </p>
-            </motion.div>
-          </AnimatePresence>
+            {/* Tagline */}
+            <p className="text-gray-300 text-xl sm:text-2xl font-medium italic mb-3 pl-1">
+              &ldquo;{config.tagline}&rdquo;
+            </p>
+            <p className="text-gray-500 text-base sm:text-lg font-light mb-10 pl-1 max-w-xl">
+              {config.subTagline}
+            </p>
+          </motion.div>
 
           {/* CTAs */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
@@ -150,25 +105,8 @@ export default function Hero({ config }) {
             </a>
           </motion.div>
 
-          {/* Carousel Indicators */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="flex gap-3 mt-12"
-          >
-            {SLIDES.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                className={`h-1.5 rounded-full transition-all duration-500 ${idx === currentSlide ? 'w-12 bg-primary' : 'w-4 bg-white/20 hover:bg-white/40'}`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
-          </motion.div>
-
           {/* Trust bar */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}

@@ -14,7 +14,7 @@ export default function Loader({ config }) {
         transition={{ duration: 0.5 }}
         className="text-primary font-headline text-5xl md:text-7xl font-black uppercase tracking-tighter text-center"
       >
-        {config?.gymName || "Jenga Gym"}
+        {config?.businessName || "Oasis Landscaping"}
       </motion.div>
       <motion.div 
         className="mt-8 w-48 h-1 bg-surface rounded-full overflow-hidden"

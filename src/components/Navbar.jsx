@@ -18,10 +18,9 @@ export default function Navbar({ config }) {
 
   const navLinks = [
     { label: 'About', href: '/#about' },
-    { label: 'Classes', href: '/classes' },
-    { label: 'Trainers', href: '/trainers' },
-    { label: 'Shop', href: '/shop' },
-    { label: 'Pricing', href: '/#pricing' },
+    { label: 'Services', href: '/services' },
+    { label: 'Team', href: '/team' },
+    { label: 'Process', href: '/#process' },
     { label: 'Contact', href: '/#contact' },
   ]
 
@@ -37,17 +36,17 @@ export default function Navbar({ config }) {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           {config.logoUrl ? (
-            <img src={config.logoUrl} alt={config.gymName} className="h-10 w-auto" />
+            <img src={config.logoUrl} alt={config.businessName} className="h-10 w-auto" />
           ) : (
             <>
               <div
                 className="w-8 h-8 rounded-sm flex items-center justify-center font-headline font-black text-white text-sm"
                 style={{ backgroundColor: 'var(--primary)' }}
               >
-                {config.gymName.charAt(0)}
+                {config.businessName?.charAt(0)}
               </div>
               <span className="font-headline font-bold text-white text-lg tracking-wider uppercase">
-                {config.gymName}
+                {config.businessName}
               </span>
             </>
           )}
@@ -91,16 +90,16 @@ export default function Navbar({ config }) {
           transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
         >
           <a
-            href="#free-trial"
+            href="#contact"
             className="btn-primary px-6 py-3 rounded-sm text-sm"
             onClick={(e) => {
               if (location.pathname === '/') {
                 e.preventDefault()
-                document.getElementById('free-trial')?.scrollIntoView({ behavior: 'smooth' })
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
               }
             }}
           >
-            Free Trial
+            Get a Quote
           </a>
         </motion.div>
 
@@ -135,9 +134,9 @@ export default function Navbar({ config }) {
               </Link>
             )
           )}
-          <a href="/#free-trial" onClick={() => setMenuOpen(false)}
+          <a href="/#contact" onClick={() => setMenuOpen(false)}
             className="btn-primary px-6 py-4 rounded-sm text-sm text-center mt-2">
-            Free Trial
+            Get a Quote
           </a>
         </div>
       </div>

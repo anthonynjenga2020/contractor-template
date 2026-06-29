@@ -179,7 +179,7 @@ export default function Contact({ config }) {
                       required
                       value={form.message}
                       onChange={e => setForm({...form, message: e.target.value})}
-                      placeholder="I'm interested in the Pro membership..."
+                      placeholder="I'm interested in a garden redesign..."
                       rows={4}
                       className="w-full px-4 py-3 rounded-sm text-white text-sm placeholder-gray-600 border focus:outline-none transition-colors resize-none"
                       style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--border)' }}
@@ -219,7 +219,7 @@ export default function Contact({ config }) {
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Gym Location"
+                title="Business Location"
               />
             ) : (
               <div
@@ -231,7 +231,7 @@ export default function Contact({ config }) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 <div className="text-center">
-                  <p className="font-bold text-white text-sm">{config.gymName}</p>
+                  <p className="font-bold text-white text-sm">{config.businessName}</p>
                   <p className="text-xs mt-1">{config.location}</p>
                 </div>
                 <a

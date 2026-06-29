@@ -40,3 +40,8 @@ lerna-debug.log*
 
 # Skills env (keep .env.example, ignore .env)
 skills/**/.env
+
+# Large local assets — keep on disk but don't commit to git
+public/scaper*
+public/scapervid.mp4
+public/gym*

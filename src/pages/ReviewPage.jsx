@@ -57,17 +57,17 @@ export default function ReviewPage({ config }) {
         {/* Gym logo / name */}
         <div className="text-center mb-12">
           {config.logoUrl ? (
-            <img src={config.logoUrl} alt={config.gymName} className="h-12 mx-auto mb-4 object-contain" />
+            <img src={config.logoUrl} alt={config.businessName} className="h-12 mx-auto mb-4 object-contain" />
           ) : (
             <div
               className="inline-flex items-center justify-center w-14 h-14 rounded-sm mb-4 font-headline font-black text-2xl text-white"
               style={{ backgroundColor: 'var(--primary)' }}
             >
-              {config.gymName.charAt(0)}
+              {config.businessName?.charAt(0)}
             </div>
           )}
           <p className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--primary)' }}>
-            {config.gymName}
+            {config.businessName}
           </p>
         </div>
 
@@ -181,7 +181,7 @@ export default function ReviewPage({ config }) {
               We&apos;re Sorry to Hear That
             </h2>
             <p className="text-gray-400 text-sm mb-8">
-              Your feedback goes directly to the gym manager. We&apos;ll follow up personally within 24 hours.
+              Your feedback goes directly to the business owner. We&apos;ll follow up personally within 24 hours.
             </p>
 
             <form onSubmit={handleFeedbackSubmit} className="space-y-4">
@@ -242,7 +242,7 @@ export default function ReviewPage({ config }) {
               </button>
 
               <p className="text-gray-600 text-xs text-center">
-                Your feedback is private — only the gym manager sees this.
+                Your feedback is private — only the business owner sees this.
               </p>
             </form>
           </div>
@@ -266,14 +266,14 @@ export default function ReviewPage({ config }) {
               Feedback Received
             </h2>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Thank you for taking the time. The gym manager will personally review your message and follow up with you shortly.
+              Thank you for taking the time. The business owner will personally review your message and follow up with you shortly.
             </p>
             <a
               href="/"
               className="mt-8 inline-block text-xs font-bold uppercase tracking-widest"
               style={{ color: 'var(--primary)' }}
             >
-              ← Back to {config.gymName}
+              ← Back to {config.businessName}
             </a>
           </div>
         )}

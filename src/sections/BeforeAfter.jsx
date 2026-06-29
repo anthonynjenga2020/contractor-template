@@ -41,6 +41,18 @@ export default function BeforeAfter({ config }) {
               className="relative rounded-sm border overflow-hidden group card-hover"
               style={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)' }}
             >
+              {/* Before/After Images */}
+              {t.imageBefore && t.imageAfter && (
+                <div className="flex h-48 border-b" style={{ borderColor: 'var(--border)' }}>
+                  <div className="w-1/2 relative border-r" style={{ borderColor: 'var(--border)' }}>
+                    <img src={t.imageBefore} alt="Before" className="absolute inset-0 w-full h-full object-cover" />
+                  </div>
+                  <div className="w-1/2 relative">
+                    <img src={t.imageAfter} alt="After" className="absolute inset-0 w-full h-full object-cover" />
+                  </div>
+                </div>
+              )}
+
               {/* Top stat bar */}
               <div className="p-6 pb-0">
                 <div className="flex items-center justify-between mb-6">

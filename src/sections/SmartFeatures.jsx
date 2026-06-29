@@ -22,7 +22,7 @@ const features = [
     color: '#FFB800',
     label: 'Review Automation',
     title: '5-Star Reviews on Autopilot',
-    desc: 'After every milestone — first week done, 10th session, first month — we automatically ask your happy members to drop a Google review. More reviews. Better ranking. More new members finding you.',
+    desc: 'After every milestone — project completion, one month check-in — we automatically ask your happy clients to drop a Google review. More reviews. Better ranking. More new clients finding you.',
     highlight: 'Google Maps #1',
   },
   {
@@ -34,7 +34,7 @@ const features = [
     color: '#4C9FFF',
     label: 'Missed Call Text-Back',
     title: 'Never Lose a Lead to Voicemail',
-    desc: "If a potential member calls and nobody picks up, they automatically get a WhatsApp message within 60 seconds: 'Hey! We missed your call. How can we help?' Most leads are won or lost in that first minute.",
+    desc: "If a potential client calls and nobody picks up, they automatically get a WhatsApp message within 60 seconds: 'Hey! We missed your call. How can we help?' Most leads are won or lost in that first minute.",
     highlight: 'Responds in 60 sec',
   },
   {
@@ -45,8 +45,8 @@ const features = [
     ),
     color: '#FF4E1A',
     label: 'Retention Campaigns',
-    title: 'Keep Members Coming Back',
-    desc: "One-click WhatsApp campaigns to inactive members, birthday messages, referral offers, and seasonal promos — sent automatically. Your members feel remembered. Your retention numbers reflect it.",
+    title: 'Keep Clients Coming Back',
+    desc: "One-click WhatsApp campaigns to past clients for seasonal maintenance, holiday specials, referral offers — sent automatically. Your clients feel remembered. Your repeat business reflects it.",
     highlight: 'One-click sends',
   },
 ]
@@ -72,15 +72,15 @@ export default function SmartFeatures({ config }) {
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-10" style={{ backgroundColor: 'var(--primary)' }} />
             <span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--primary)' }}>
-              Smart Gym Technology
+              Smart Technology
             </span>
           </div>
           <h2 className="font-headline font-black text-4xl sm:text-5xl lg:text-6xl text-white uppercase leading-tight mb-6">
-            The Digital Gym<br />
+            The Digital<br />
             <span style={{ color: 'var(--primary)' }}>Experience</span>
           </h2>
           <p className="text-gray-400 text-lg leading-relaxed">
-            We're not just a place to lift weights. We've built the tools to make your fitness journey seamless — from booking to billing to beating your personal best.
+            We're not just about building great spaces. We've built the tools to make your project seamless — from booking to billing.
           </p>
         </div>
 

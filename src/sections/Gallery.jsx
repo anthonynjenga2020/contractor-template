@@ -28,15 +28,15 @@ export default function Gallery({ config }) {
             <div className="flex items-center gap-4 mb-4">
               <div className="h-px w-10" style={{ backgroundColor: 'var(--primary)' }} />
               <span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--primary)' }}>
-                The Space
+                Our Portfolio
               </span>
             </div>
             <h2 className="font-headline font-black text-4xl sm:text-5xl lg:text-6xl text-white uppercase leading-tight">
-              Our Gym
+              Our Work
             </h2>
           </div>
           <p className="text-gray-500 max-w-sm lg:text-right">
-            State-of-the-art equipment. Clean facilities. A space that makes you actually want to show up.
+            Expert craftsmanship. Premium materials. Outdoor spaces built to last.
           </p>
         </div>
 

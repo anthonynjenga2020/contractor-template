@@ -13,8 +13,8 @@ applyTheme(config.templateVariant ?? 'V1', config.primaryColor)
 // Config-driven SEO — title, description, Open Graph, canonical
 // ─────────────────────────────────────────────────────────────
 const siteUrl   = config.deployedUrl || window.location.origin
-const siteName  = config.gymName
-const siteDesc  = config.seoDescription || `${config.gymName} — ${config.tagline}. ${config.location}.`
+const siteName  = config.businessName || "Oasis Landscaping"
+const siteDesc  = config.seoDescription || `${config.businessName} — ${config.tagline}. ${config.location}.`
 const heroImage = config.heroImageUrl || ''
 
 // Helper: upsert a <meta> tag
@@ -28,13 +28,13 @@ function setMeta(selector, attr, value) {
 }
 
 // Title
-document.title = `${siteName} | ${config.tagline ?? 'Gym & Fitness Center'} — ${config.location ?? 'Nairobi'}`
+document.title = `${siteName} | ${config.tagline ?? 'Landscaping & Hardscaping'} — ${config.location ?? 'Nairobi'}`
 
 // Standard meta
 setMeta('meta[name="description"]',        'content',  siteDesc)
 setMeta('meta[name="keywords"]',           'name',     'keywords')
 document.querySelector('meta[name="keywords"]')?.setAttribute('content',
-  `gym, fitness, ${config.location}, ${config.gymName}, ${(config.services ?? []).map(s => s.name ?? s).join(', ')}`
+  `contractor, landscaping, ${config.location}, ${config.businessName}, ${(config.services ?? []).map(s => s.name ?? s).join(', ')}`
 )
 
 // Open Graph
@@ -73,7 +73,7 @@ canonical.href = siteUrl
 // JSON-LD structured data (LocalBusiness)
 const schema = {
   "@context":       "https://schema.org",
-  "@type":          "HealthClub",
+  "@type":          "LocalBusiness",
   "name":           siteName,
   "description":    siteDesc,
   "url":            siteUrl,

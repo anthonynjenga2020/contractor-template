@@ -19,9 +19,9 @@ export default function WhatsAppButton({ config }) {
   }
 
   const quickOptions = [
-    "Membership Pricing",
-    "Book a Free Trial",
-    "Class Schedule",
+    "Request a Quote",
+    "Service Questions",
+    "Project Timeline",
     "Location & Hours"
   ]
 
@@ -40,10 +40,10 @@ export default function WhatsAppButton({ config }) {
             <div className="bg-[#00A884] p-4 flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-xl">
-                  {config.gymName.charAt(0)}
+                  {config.businessName?.charAt(0)}
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-sm">{config.gymName}</h3>
+                  <h3 className="text-white font-bold text-sm">{config.businessName}</h3>
                   <div className="flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-[#25D366]"></span>
                     <span className="text-white/80 text-xs">Online now</span>
@@ -58,7 +58,7 @@ export default function WhatsAppButton({ config }) {
             {/* Body */}
             <div className="p-4 bg-[#0B141A] space-y-4">
               <div className="bg-[#202C33] p-4 rounded-xl rounded-tl-sm text-gray-200 text-sm shadow-sm relative">
-                <p className="font-bold text-white mb-1">Hi there! Welcome to {config.gymName}. How can I help you today?</p>
+                <p className="font-bold text-white mb-1">Hi there! Welcome to {config.businessName}. How can I help you today?</p>
                 <p className="text-gray-400 text-xs">Choose an option below or type your message.</p>
               </div>
 

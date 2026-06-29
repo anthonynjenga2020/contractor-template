@@ -3,9 +3,9 @@ export default function Footer({ config }) {
 
   const links = [
     { label: 'About', href: '#about' },
-    { label: 'Classes', href: '#classes' },
-    { label: 'Trainers', href: '#trainers' },
-    { label: 'Pricing', href: '#pricing' },
+    { label: 'Services', href: '/services' },
+    { label: 'Team', href: '/team' },
+    { label: 'Process', href: '#process' },
     { label: 'Contact', href: '#contact' },
   ]
 
@@ -20,10 +20,10 @@ export default function Footer({ config }) {
                 className="w-8 h-8 rounded-sm flex items-center justify-center font-headline font-black text-white text-sm"
                 style={{ backgroundColor: 'var(--primary)' }}
               >
-                {config.gymName.charAt(0)}
+                {config.businessName?.charAt(0)}
               </div>
               <span className="font-headline font-bold text-white text-lg tracking-wider uppercase">
-                {config.gymName}
+                {config.businessName}
               </span>
             </div>
             <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
@@ -86,9 +86,9 @@ export default function Footer({ config }) {
             <p className="text-gray-500 text-xs uppercase tracking-[0.2em] font-bold mb-6">Opening Hours</p>
             <ul className="space-y-3">
               {[
-                { day: 'Mon – Fri', hours: '5:00 AM – 10:00 PM' },
-                { day: 'Saturday', hours: '6:00 AM – 8:00 PM' },
-                { day: 'Sunday', hours: '7:00 AM – 6:00 PM' },
+                { day: 'Mon – Fri', hours: '8:00 AM – 5:00 PM' },
+                { day: 'Saturday', hours: '9:00 AM – 2:00 PM' },
+                { day: 'Sunday', hours: 'Closed' },
               ].map((item, i) => (
                 <li key={i} className="flex justify-between text-sm">
                   <span className="text-gray-500">{item.day}</span>
@@ -97,12 +97,12 @@ export default function Footer({ config }) {
               ))}
             </ul>
             <a
-              href={`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent('Hi! I want to claim my free 7-day trial.')}`}
+              href={`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent('Hi! I want to request a free estimate.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-block mt-6 px-6 py-3 rounded-sm text-sm"
             >
-              Free Trial →
+              Get a Quote →
             </a>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function Footer({ config }) {
         {/* Bottom bar */}
         <div className="pt-8 border-t flex flex-col sm:flex-row justify-between items-center gap-4" style={{ borderColor: 'var(--border)' }}>
           <p className="text-gray-600 text-xs">
-            © {year} {config.gymName}. All rights reserved.
+            © {year} {config.businessName}. All rights reserved.
           </p>
           <p className="text-gray-700 text-xs">
             Website powered by{' '}
