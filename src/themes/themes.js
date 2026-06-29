@@ -6,7 +6,7 @@
 //   font      — Google Fonts URL to load dynamically
 //   bodyClass — Class added to <body> for variant-specific CSS overrides
 //
-// The primaryColor in gym.config.json overrides `css.primary` unless
+// The primaryColor in config.json overrides `css.primary` unless
 // the theme defines `lockPrimary: true`.
 // ============================================================
 
@@ -141,7 +141,7 @@ export const themes = {
  * Call this from main.jsx before rendering the app.
  *
  * @param {string} variant   — 'V1'|'V2'|'V3'|'V4'|'V5'
- * @param {string} primaryOverride — hex color from gym.config.json
+ * @param {string} primaryOverride - hex color from config.json
  */
 export function applyTheme(variant, primaryOverride) {
   const theme = themes[variant] ?? themes.V1
