@@ -7,9 +7,9 @@ import WhatsAppButton from './components/WhatsAppButton.jsx'
 
 // Pages
 import HomePage from './pages/HomePage.jsx'
-import ClassesPage from './pages/ClassesPage.jsx'
-import TrainersPage from './pages/TrainersPage.jsx'
-import TrainerPage from './pages/TrainerPage.jsx'
+import ServicesPage from './pages/ServicesPage.jsx'
+import TeamPage from './pages/TeamPage.jsx'
+import TeamMemberPage from './pages/TeamMemberPage.jsx'
 import ReviewPage from './pages/ReviewPage.jsx'
 import ShopPage from './pages/ShopPage.jsx'
 import { AnimatePresence } from 'framer-motion'
@@ -31,17 +31,17 @@ function Layout({ children, config }) {
 export default function App() {
   const config = useMemo(() => {
     const searchParams = new URLSearchParams(window.location.search)
-    const gymQuery = searchParams.get('gym')
+    const businessQuery = searchParams.get('business')
     const locationQuery = searchParams.get('location')
     
-    if (gymQuery || locationQuery) {
+    if (businessQuery || locationQuery) {
       const newConfig = { ...defaultConfig }
       
-      if (gymQuery) {
-        newConfig.gymName = gymQuery
-        // Replace all instances of Ironclad Fitness in messages and descriptions
-        newConfig.whatsappMessage = newConfig.whatsappMessage.replace(/Ironclad Fitness/g, gymQuery)
-        newConfig.aboutDescription = newConfig.aboutDescription.replace(/Ironclad Fitness/g, gymQuery)
+      if (businessQuery) {
+        newConfig.businessName = businessQuery
+        // Replace all instances of Ironclad Landscaping in messages and descriptions
+        newConfig.whatsappMessage = newConfig.whatsappMessage.replace(/Ironclad Landscaping/g, businessQuery)
+        newConfig.aboutDescription = newConfig.aboutDescription.replace(/Ironclad Landscaping/g, businessQuery)
       }
       
       if (locationQuery) {
@@ -59,9 +59,9 @@ export default function App() {
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/"                    element={<HomePage    config={config} />} />
-            <Route path="/classes"             element={<ClassesPage config={config} />} />
-            <Route path="/trainers"            element={<TrainersPage config={config} />} />
-            <Route path="/trainers/:trainerId" element={<TrainerPage  config={config} />} />
+            <Route path="/services"            element={<ServicesPage config={config} />} />
+            <Route path="/team"                element={<TeamPage config={config} />} />
+            <Route path="/team/:memberId"      element={<TeamMemberPage  config={config} />} />
             <Route path="/shop"                element={<ShopPage     config={config} />} />
             <Route path="/review"              element={<ReviewPage   config={config} />} />
           </Routes>

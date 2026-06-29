@@ -25,23 +25,23 @@ export default function CTA({ config }) {
         <div className="flex items-center justify-center gap-4 mb-6">
           <div className="h-px w-10" style={{ backgroundColor: 'var(--primary)' }} />
           <span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--primary)' }}>
-            Limited Spots Available
+            Ready to Transform Your Yard?
           </span>
           <div className="h-px w-10" style={{ backgroundColor: 'var(--primary)' }} />
         </div>
 
         <h2 className="font-headline font-black text-5xl sm:text-6xl lg:text-7xl text-white uppercase leading-tight mb-6">
-          Your First Week.<br />
-          <span style={{ color: 'var(--primary)' }}>On Us.</span>
+          Get a Free<br />
+          <span style={{ color: 'var(--primary)' }}>Estimate.</span>
         </h2>
 
         <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
-          Try any class, use all the equipment, meet the coaches — for 7 full days, completely free. No credit card, no pressure, no BS.
+          Contact us today for a free on-site consultation and quote. We'll work with you to bring your outdoor vision to life.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4">
           <a
-            href="#free-trial"
+            href="#contact"
             className="btn-primary px-10 py-5 rounded-sm text-base inline-block"
           >
             {config.trialCTA}
@@ -55,7 +55,7 @@ export default function CTA({ config }) {
         </div>
 
         <p className="text-gray-600 text-xs mt-8 uppercase tracking-widest">
-          No commitment required · Cancel anytime · M-Pesa accepted
+          Fully licensed and insured · Satisfaction guaranteed
         </p>
       </div>
     </section>

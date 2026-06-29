@@ -33,10 +33,10 @@ export default function About({ config }) {
 
             <div className="mt-10 flex flex-wrap gap-8">
               {[
-                { icon: '✓', text: 'Professional Coaching' },
-                { icon: '✓', text: 'Modern Equipment' },
-                { icon: '✓', text: 'Supportive Community' },
-                { icon: '✓', text: 'Flexible Membership' },
+                { icon: '✓', text: 'Tailored Solutions' },
+                { icon: '✓', text: 'Premium Materials' },
+                { icon: '✓', text: 'Transparent Process' },
+                { icon: '✓', text: 'Reliable Support' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <span className="font-black text-sm" style={{ color: 'var(--primary)' }}>{item.icon}</span>
@@ -46,10 +46,10 @@ export default function About({ config }) {
             </div>
 
             <a
-              href="#pricing"
+              href="#contact"
               className="btn-primary inline-block mt-10 px-8 py-4 rounded-sm text-sm"
             >
-              Start Your Journey
+              Get Started
             </a>
           </div>
 

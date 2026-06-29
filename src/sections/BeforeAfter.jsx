@@ -1,7 +1,7 @@
 import { useReveal } from '../hooks/useReveal.js'
 
-export default function Transformation({ config }) {
-  if (!config.transformations?.length) return null
+export default function BeforeAfter({ config }) {
+  if (!config.beforeAfter?.length) return null
   const headerRef = useReveal()
   const contentRef = useReveal()
 
@@ -22,21 +22,21 @@ export default function Transformation({ config }) {
               </span>
             </div>
             <h2 className="font-headline font-black text-4xl sm:text-5xl lg:text-6xl text-white uppercase leading-tight">
-              They Came In.<br />
-              They <span style={{ color: 'var(--primary)' }}>Changed.</span>
+              Before &<br />
+              <span style={{ color: 'var(--primary)' }}>After.</span>
             </h2>
             <p className="text-gray-400 text-lg mt-4 max-w-xl">
-              No filters, no tricks. Just real members, real numbers, real life changes.
+              See the difference a professional touch can make to your outdoor space. Real projects, real transformations.
             </p>
           </div>
-          <a href="#free-trial" className="btn-primary px-6 py-3 rounded-sm text-sm self-start lg:self-auto shrink-0">
-            Start Your Story â
+          <a href="#contact" className="btn-primary px-6 py-3 rounded-sm text-sm self-start lg:self-auto shrink-0">
+            Get Your Free Quote →
           </a>
         </div>
 
         {/* Transformation cards */}
         <div ref={contentRef} className="section-reveal grid lg:grid-cols-3 gap-6">
-          {config.transformations.map((t, i) => (
+          {config.beforeAfter.map((t, i) => (
             <div key={i}
               className="relative rounded-sm border overflow-hidden group card-hover"
               style={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)' }}

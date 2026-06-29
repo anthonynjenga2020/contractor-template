@@ -1,15 +1,9 @@
 import { useReveal } from '../hooks/useReveal.js'
 
-export default function Programs({ config }) {
-  if (!config.programs?.length) return null
+export default function RecentProjects({ config }) {
+  if (!config.recentProjects?.length) return null
   const headerRef = useReveal()
   const contentRef = useReveal()
-
-  const levelColors = {
-    'All Levels': '#33D169',
-    'BeginnerâIntermediate': '#4C9FFF',
-    'IntermediateâAdvanced': '#FF4E1A',
-  }
 
   return (
     <section className="py-28 lg:py-40" style={{ backgroundColor: 'var(--surface)' }}>
@@ -19,23 +13,22 @@ export default function Programs({ config }) {
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="h-px w-10" style={{ backgroundColor: 'var(--primary)' }} />
             <span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--primary)' }}>
-              Structured Programs
+              Portfolio
             </span>
             <div className="h-px w-10" style={{ backgroundColor: 'var(--primary)' }} />
           </div>
           <h2 className="font-headline font-black text-4xl sm:text-5xl lg:text-6xl text-white uppercase leading-tight mb-4">
-            Commit to a Program.<br />
-            <span style={{ color: 'var(--primary)' }}>Get Real Results.</span>
+            Recent Projects.<br />
+            <span style={{ color: 'var(--primary)' }}>See Our Work.</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Not just a gym membership. These are structured, coached programs with a clear goal, a clear timeline, and real accountability.
+            Explore some of our recent landscaping and hardscaping transformations. From small patio additions to complete estate redesigns.
           </p>
         </div>
 
         {/* Program cards */}
         <div ref={contentRef} className="section-reveal grid lg:grid-cols-3 gap-6">
-          {config.programs.map((program, i) => {
-            const levelColor = levelColors[program.level] || 'var(--primary)'
+          {config.recentProjects.map((program, i) => {
             const isFeatured = i === 0
 
             return (
@@ -49,19 +42,13 @@ export default function Programs({ config }) {
                 {isFeatured && (
                   <div className="py-2 text-center text-xs font-black uppercase tracking-widest text-white"
                     style={{ backgroundColor: 'var(--primary)' }}>
-                    Most Popular
+                    Featured Project
                   </div>
                 )}
 
                 <div className="p-8 flex flex-col flex-1">
                   {/* Icon + title */}
                   <div className="text-4xl mb-4">{program.icon}</div>
-                  <div className="mb-2">
-                    <span className="text-xs font-bold px-2 py-0.5 rounded-sm uppercase tracking-widest"
-                      style={{ color: levelColor, backgroundColor: `${levelColor}15` }}>
-                      {program.level}
-                    </span>
-                  </div>
                   <h3 className="font-headline font-black text-2xl text-white uppercase mb-1 mt-3">
                     {program.name}
                   </h3>
@@ -94,14 +81,13 @@ export default function Programs({ config }) {
                   <div className="border-t pt-6 mt-auto" style={{ borderColor: 'var(--border)' }}>
                     <div className="flex items-end justify-between mb-4">
                       <div>
-                        <p className="text-gray-600 text-xs uppercase tracking-widest mb-1">Program Fee</p>
+                        <p className="text-gray-600 text-xs uppercase tracking-widest mb-1">Project Budget</p>
                         <p className="font-headline font-black text-3xl text-white">
-                          {program.currency} {program.price.toLocaleString()}
+                          {program.budget}
                         </p>
                       </div>
-                      <p className="text-gray-600 text-xs">One-time</p>
                     </div>
-                    <a href="#free-trial"
+                    <a href="#contact"
                       className={`block w-full py-3.5 rounded-sm text-sm font-black uppercase tracking-widest text-center transition-all ${
                         isFeatured ? 'btn-primary' : 'border hover:border-primary'
                       }`}
@@ -123,7 +109,7 @@ export default function Programs({ config }) {
 
         {/* Note */}
         <p className="text-center text-gray-600 text-xs mt-8 uppercase tracking-widest">
-          All programs include full gym access for the duration Â· M-Pesa accepted
+          All projects are fully insured and guaranteed.
         </p>
       </div>
     </section>
