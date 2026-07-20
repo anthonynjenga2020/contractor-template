@@ -32,12 +32,12 @@ export default function Testimonials({ config }) {
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="h-px w-10" style={{ backgroundColor: 'var(--primary)' }} />
             <span className="text-xs font-bold uppercase tracking-[0.3em]" style={{ color: 'var(--primary)' }}>
-              Real Members, Real Results
+              Real Clients, Real Results
             </span>
             <div className="h-px w-10" style={{ backgroundColor: 'var(--primary)' }} />
           </div>
           <h2 className="font-headline font-black text-4xl sm:text-5xl lg:text-6xl text-white uppercase leading-tight mb-4">
-            What Our Members Say
+            What Our Clients Say
           </h2>
 
           {/* Google aggregate */}

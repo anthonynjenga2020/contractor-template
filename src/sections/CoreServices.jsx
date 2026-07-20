@@ -46,8 +46,8 @@ export default function CoreServices({ config }) {
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
 
-              {/* Content */}
-              <div className="relative z-10 p-8 transform transition-transform duration-500 translate-y-24 group-hover:translate-y-0">
+              {/* Content — always visible on mobile, slides up on desktop hover */}
+              <div className="relative z-10 p-8 transform transition-transform duration-500 md:translate-y-24 md:group-hover:translate-y-0">
                 {/* Title */}
                 <h3 className="font-headline font-bold text-xl text-white uppercase tracking-wide mb-3">
                   {service.name}
@@ -59,8 +59,8 @@ export default function CoreServices({ config }) {
                   style={{ backgroundColor: 'var(--primary)' }}
                 />
 
-                {/* Hover Content */}
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                {/* Hover Content — always visible on mobile */}
+                <div className="md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-100">
                   <p className="text-gray-300 text-sm leading-relaxed mb-6">{service.desc}</p>
                   
                   {/* CTA */}

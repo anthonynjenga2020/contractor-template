@@ -92,7 +92,7 @@ export default function Hero({ config }) {
             className="flex flex-wrap gap-4"
           >
             <a
-              href="#process"
+              href="#contact"
               className="btn-primary px-8 py-4 rounded-sm text-base inline-block"
             >
               {config.trialCTA}

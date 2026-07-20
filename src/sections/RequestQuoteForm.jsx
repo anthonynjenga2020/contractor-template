@@ -18,15 +18,12 @@ export default function RequestQuoteForm({ config }) {
     setLoading(true)
     try {
       await insertLead({
-        gymName:       config.businessName, // Supabase column still expects gymName internally unless we changed it in the edge function / schema. Wait, I changed it to business_name in schema.sql!
-        // Actually, insertLead might use businessName. Let me check lib/supabase.js
-        // Let's pass businessName instead.
         businessName:  config.businessName,
         name:          form.name,
         email:         form.email,
         phone:         form.phone,
         goal:          form.goal,
-        classInterest: form.serviceInterest, // Using classInterest for now to keep DB simple, or maybe service_interest if changed. I will map it to classInterest for now or serviceInterest.
+        classInterest: form.serviceInterest,
         preferredTime: form.preferredTime,
         source:        'website_quote_request',
       })
@@ -183,6 +180,10 @@ export default function RequestQuoteForm({ config }) {
                   >
                     {loading ? 'Submitting...' : 'Request Quote →'}
                   </button>
+
+                  <p className="text-gray-600 text-xs text-center mt-3">
+                    🔒 We respond within 2 hours during business hours. No spam, ever.
+                  </p>
 
                 </form>
               </>

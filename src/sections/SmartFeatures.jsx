@@ -8,9 +8,9 @@ const features = [
       </svg>
     ),
     color: '#25D366',
-    label: 'Instant WhatsApp Booking',
-    title: 'Book Classes in 30 Seconds',
-    desc: "No apps to download, no forms to fill. Just WhatsApp us and you're booked. Get instant confirmation, class reminders, and follow-ups — all on the app you already use every day.",
+    label: 'Instant WhatsApp Quotes',
+    title: 'Request a Quote in 30 Seconds',
+    desc: "No phone tag, no waiting. WhatsApp us your project idea and get a same-day response. Confirmation, reminders, and follow-ups — all on the app your clients already use every day.",
     highlight: 'No app needed',
   },
   {

@@ -98,7 +98,7 @@ export default function RecentProjects({ config }) {
                       onMouseOver={!isFeatured ? (e => { e.currentTarget.style.borderColor = 'var(--primary)'; e.currentTarget.style.backgroundColor = 'rgba(255,78,26,0.08)' }) : undefined}
                       onMouseOut={!isFeatured ? (e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.backgroundColor = 'transparent' }) : undefined}
                     >
-                      Enquire Now â
+                      Enquire Now →
                     </a>
                   </div>
                 </div>
