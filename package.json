@@ -1,5 +1,5 @@
 {
-  "name": "jenga-gym-template",
+  "name": "contractor-template",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -9,17 +9,26 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "framer-motion": "^12.40.0",
+    "framer-motion": "^11.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
-    "autoprefixer": "^10.4.17",
-    "postcss": "^8.4.33",
+    "autoprefixer": "10.4.17",
+    "browserslist": "4.23.0",
+    "caniuse-lite": "1.0.30001587",
+    "postcss": "8.4.33",
     "postcss-selector-parser": "6.0.15",
-    "tailwindcss": "^3.4.1",
-    "vite": "^5.0.11"
+    "tailwindcss": "3.4.1",
+    "vite": "5.0.11"
+  },
+  "overrides": {
+    "autoprefixer": "10.4.17",
+    "browserslist": "4.23.0",
+    "caniuse-lite": "1.0.30001587",
+    "postcss": "8.4.33",
+    "postcss-selector-parser": "6.0.15"
   }
 }
