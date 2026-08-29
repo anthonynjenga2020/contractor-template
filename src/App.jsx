@@ -8,6 +8,10 @@ import WhatsAppButton from './components/WhatsAppButton.jsx'
 // Pages
 import HomePage from './pages/HomePage.jsx'
 import ServicesPage from './pages/ServicesPage.jsx'
+import ProjectsPage from './pages/ProjectsPage.jsx'
+import ProjectDetailPage from './pages/ProjectDetailPage.jsx'
+import MaintenancePage from './pages/MaintenancePage.jsx'
+import PricingPage from './pages/PricingPage.jsx'
 import TeamPage from './pages/TeamPage.jsx'
 import TeamMemberPage from './pages/TeamMemberPage.jsx'
 import ReviewPage from './pages/ReviewPage.jsx'
@@ -58,12 +62,16 @@ export default function App() {
       <Layout config={config}>
         <AnimatePresence mode="wait">
           <Routes>
-            <Route path="/"                    element={<HomePage    config={config} />} />
-            <Route path="/services"            element={<ServicesPage config={config} />} />
-            <Route path="/team"                element={<TeamPage config={config} />} />
-            <Route path="/team/:memberId"      element={<TeamMemberPage  config={config} />} />
-            <Route path="/shop"                element={<ShopPage     config={config} />} />
-            <Route path="/review"              element={<ReviewPage   config={config} />} />
+            <Route path="/"                    element={<HomePage            config={config} />} />
+            <Route path="/services"            element={<ServicesPage        config={config} />} />
+            <Route path="/projects"            element={<ProjectsPage        config={config} />} />
+            <Route path="/projects/:projectId" element={<ProjectDetailPage   config={config} />} />
+            <Route path="/maintenance"         element={<MaintenancePage     config={config} />} />
+            <Route path="/pricing"             element={<PricingPage         config={config} />} />
+            <Route path="/team"                element={<TeamPage            config={config} />} />
+            <Route path="/team/:memberId"      element={<TeamMemberPage      config={config} />} />
+            <Route path="/shop"                element={<ShopPage            config={config} />} />
+            <Route path="/review"              element={<ReviewPage          config={config} />} />
           </Routes>
         </AnimatePresence>
       </Layout>

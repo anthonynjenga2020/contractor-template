@@ -2,11 +2,13 @@ export default function Footer({ config }) {
   const year = new Date().getFullYear()
 
   const links = [
-    { label: 'About', href: '#about' },
     { label: 'Services', href: '/services' },
+    { label: 'Portfolio Projects', href: '/projects' },
+    { label: 'Estimator', href: '/#calculator' },
+    { label: 'Maintenance Plans', href: '/maintenance' },
+    { label: 'Pricing Guide', href: '/pricing' },
     { label: 'Team', href: '/team' },
-    { label: 'Process', href: '#process' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Leave a Review', href: '/review' },
   ]
 
   return (

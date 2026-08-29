@@ -17,10 +17,12 @@ export default function Navbar({ config }) {
   useEffect(() => setMenuOpen(false), [location.pathname])
 
   const navLinks = [
-    { label: 'About', href: '/#about' },
     { label: 'Services', href: '/services' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Estimator', href: '/#calculator' },
+    { label: 'Maintenance', href: '/maintenance' },
+    { label: 'Pricing', href: '/pricing' },
     { label: 'Team', href: '/team' },
-    { label: 'Process', href: '/#process' },
     { label: 'Contact', href: '/#contact' },
   ]
 

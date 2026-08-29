@@ -1,4 +1,5 @@
 import { useReveal } from '../hooks/useReveal.js'
+import BeforeAfterSlider from '../components/BeforeAfterSlider.jsx'
 
 export default function BeforeAfter({ config }) {
   if (!config.beforeAfter?.length) return null
@@ -38,19 +39,18 @@ export default function BeforeAfter({ config }) {
         <div ref={contentRef} className="section-reveal grid lg:grid-cols-3 gap-6">
           {config.beforeAfter.map((t, i) => (
             <div key={i}
-              className="relative rounded-sm border overflow-hidden group card-hover"
+              className="relative rounded-sm border overflow-hidden group card-hover flex flex-col justify-between"
               style={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)' }}
             >
-              {/* Before/After Images */}
+              {/* Before/After Draggable Slider */}
               {t.imageBefore && t.imageAfter && (
-                <div className="flex h-48 border-b" style={{ borderColor: 'var(--border)' }}>
-                  <div className="w-1/2 relative border-r" style={{ borderColor: 'var(--border)' }}>
-                    <img src={t.imageBefore} alt="Before" className="absolute inset-0 w-full h-full object-cover" />
-                  </div>
-                  <div className="w-1/2 relative">
-                    <img src={t.imageAfter} alt="After" className="absolute inset-0 w-full h-full object-cover" />
-                  </div>
-                </div>
+                <BeforeAfterSlider
+                  imageBefore={t.imageBefore}
+                  imageAfter={t.imageAfter}
+                  labelBefore="Before"
+                  labelAfter="After"
+                  heightClass="h-56 sm:h-64"
+                />
               )}
 
               {/* Top stat bar */}
